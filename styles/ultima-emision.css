@@ -120,7 +120,7 @@
 
 
 /* ============================
-   EFECTO LINEAS CRT
+   EFECTO CRT
 ============================ */
 
 .radio-screen::after{
@@ -163,27 +163,24 @@
 
 
 /* ============================
-   BOTONES PANEL
+   CONTENEDOR BOTONES
 ============================ */
 
 .radio-buttons{
-
   position:absolute;
-
-  bottom:40px;     /* baja los botones */
-  left:520px;      /* desplaza a la derecha */
-
-  width:260px;     /* más estrecho → botones más juntos */
-
-  display:flex;
-  justify-content:space-between;
-
+  bottom:35px;
+  left:0;
+  width:100%;
 }
 
 
-/* BOTONES INVISIBLES */
+/* ============================
+   BOTONES INVISIBLES
+============================ */
 
 .radio-buttons button{
+
+  position:absolute;
 
   background:transparent;
   border:none;
@@ -194,22 +191,51 @@
 
   cursor:pointer;
 
-  color:#1a1a1a;
-
+  color:#111;
   font-size:14px;
   font-weight:bold;
-
   text-align:center;
 
 }
 
 
-/* TEXTO SOBRE BOTÓN */
+/* ============================
+   POSICIÓN BOTONES
+============================ */
+
+/* PERDER FRECUENCIA (sin tocar) */
+
+.radio-buttons button:nth-child(1){
+
+  left:430px;
+
+}
+
+
+/* INTERFERENCIA (sin tocar) */
+
+.radio-buttons button:nth-child(2){
+
+  left:520px;
+
+}
+
+
+/* REINICIAR (movido a la derecha) */
+
+.radio-buttons button:nth-child(3){
+
+  left:640px;
+
+}
+
+
+/* ============================
+   HOVER
+============================ */
 
 .radio-buttons button:hover{
 
-  color:black;
-  text-shadow:
-    0 0 4px rgba(255,255,255,0.5);
+  text-shadow:0 0 4px rgba(255,255,255,0.5);
 
 }
