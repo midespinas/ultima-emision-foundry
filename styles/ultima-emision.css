@@ -203,32 +203,28 @@
    POSICIÓN BOTONES
 ============================ */
 
-/* PERDER FRECUENCIA (sin tocar) */
+/* PERDER FRECUENCIA */
 
 .radio-buttons button:nth-child(1){
-
   left:430px;
-
 }
 
 
-/* INTERFERENCIA (sin tocar) */
+/* INTERFERENCIA */
 
 .radio-buttons button:nth-child(2){
-
   left:520px;
-
 }
 
 
-/* REINICIAR (ajustado) */
+/* REINICIAR (ajuste fino) */
 
 .radio-buttons button:nth-child(3){
 
-  left:700px;      /* más a la derecha */
-  bottom:55px;     /* sube bastante */
+  left:702px;
+  bottom:53px;
 
-  width:120px;     /* botón más grande */
+  width:120px;
   height:90px;
 
 }
