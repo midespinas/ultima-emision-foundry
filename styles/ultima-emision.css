@@ -95,24 +95,24 @@ animation:flash 0.4s ease-in-out 3;
 
 position:absolute;
 
-top:115px;
-left:480px;
+top:95px;
+left:455px;
 
-width:330px;
-height:235px;
+width:380px;
+height:270px;
 
 background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
 
 background-size:100% 100%;
 background-repeat:no-repeat;
 
-padding:20px;
+padding:22px;
 
 color:#00ff9c;
 
 text-shadow:0 0 8px #00ff9c;
 
-font-size:14px;
+font-size:15px;
 
 overflow:hidden;
 
