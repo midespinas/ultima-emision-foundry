@@ -1,10 +1,24 @@
-/* =================================
-   CONSOLA PRINCIPAL
-================================= */
+/* ============================
+   VENTANA FOUNDRY
+============================ */
+
+.window-app .window-content{
+
+overflow:visible !important;
+
+height:auto !important;
+
+}
+
+
+/* ============================
+   CONSOLA
+============================ */
 
 .radio-console{
 
 background-image:url("/modules/ultima-emision/assets/radio-console.webp");
+
 background-size:contain;
 background-repeat:no-repeat;
 background-position:center;
@@ -23,20 +37,9 @@ color:#00ff88;
 }
 
 
-/* =================================
-   TITULO (aunque ya está en la imagen)
-================================= */
-
-.radio-title{
-
-display:none;
-
-}
-
-
-/* =================================
-   LUCES DE FRECUENCIA
-================================= */
+/* ============================
+   LUCES
+============================ */
 
 .radio-lights{
 
@@ -69,8 +72,6 @@ transition:all 0.3s ease;
 }
 
 
-/* animación de parpadeo */
-
 .radio-light.flash{
 
 animation:radioFlash 0.4s ease-in-out 3;
@@ -88,10 +89,9 @@ animation:radioFlash 0.4s ease-in-out 3;
 }
 
 
-
-/* =================================
+/* ============================
    PANTALLA CRT
-================================= */
+============================ */
 
 .radio-screen{
 
@@ -116,7 +116,7 @@ text-shadow:0 0 6px #00ff88;
 }
 
 
-/* scanlines CRT */
+/* SCANLINES */
 
 .radio-screen::after{
 
@@ -144,10 +144,6 @@ pointer-events:none;
 }
 
 
-/* =================================
-   TEXTO DE LA PANTALLA
-================================= */
-
 .radio-screen div{
 
 margin-bottom:4px;
@@ -155,10 +151,9 @@ margin-bottom:4px;
 }
 
 
-
-/* =================================
+/* ============================
    BOTONES
-================================= */
+============================ */
 
 .radio-buttons{
 
