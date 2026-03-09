@@ -1,34 +1,20 @@
-const MODULE_ID = "ultima-emision-foundry";
-
-let panel;
-
-
-// ============================
-// PANEL APPLICATION
-// ============================
+const MODULE_ID = "ultima-emision";
 
 class RadioPanel extends Application {
 
 static get defaultOptions() {
-
 return foundry.utils.mergeObject(super.defaultOptions,{
 id:"radio-panel",
 title:"📻 La Última Emisión",
 width:920,
 height:560,
-resizable:true
+resizable:false
 });
-
 }
-
-
-// ============================
-// DATOS
-// ============================
 
 getData(){
 
-let frecuencias = game.settings.get(MODULE_ID,"frecuencias");
+const frecuencias = game.settings.get(MODULE_ID,"frecuencias");
 
 let luces=[];
 
@@ -40,27 +26,22 @@ return {luces};
 
 }
 
-
-// ============================
-// HTML
-// ============================
-
 _renderInner(){
 
-let data=this.getData();
+const data=this.getData();
 
 let lucesHTML="";
 
 data.luces.forEach(l=>{
 
 lucesHTML+=`
-<img class="radio-light"
-src="modules/ultima-emision-foundry/assets/light-${l?"on":"off"}.webp">
+<img class="radio-light ${l ? "on":"off"}"
+src="/modules/${MODULE_ID}/assets/light-${l ? "on":"off"}.webp">
 `;
 
 });
 
-let html=`
+return $(`
 
 <div class="radio-console">
 
@@ -68,7 +49,7 @@ let html=`
 ${lucesHTML}
 </div>
 
-<div id="radio-screen" class="radio-screen">
+<div class="radio-screen" id="radio-screen">
 <div>> Señal estable</div>
 </div>
 
@@ -84,21 +65,13 @@ ${lucesHTML}
 
 </div>
 
-`;
-
-return $(html);
+`);
 
 }
-
-
-// ============================
-// EVENTOS
-// ============================
 
 activateListeners(html){
 
 super.activateListeners(html);
-
 
 html.find("#perder").click(async()=>{
 
@@ -118,7 +91,6 @@ this.render();
 
 });
 
-
 html.find("#interferencia").click(()=>{
 
 emitirMensaje("La señal se llena de estática");
@@ -126,7 +98,6 @@ emitirMensaje("La señal se llena de estática");
 flashLuces();
 
 });
-
 
 html.find("#reset").click(async()=>{
 
@@ -142,11 +113,6 @@ this.render();
 
 }
 
-
-// ============================
-// INIT
-// ============================
-
 Hooks.once("init",()=>{
 
 game.settings.register(MODULE_ID,"frecuencias",{
@@ -158,23 +124,11 @@ default:6
 
 });
 
-
-// ============================
-// READY
-// ============================
-
 Hooks.once("ready",()=>{
 
-panel = new RadioPanel();
-
-panel.render(true);
+new RadioPanel().render(true);
 
 });
-
-
-// ============================
-// MENSAJES
-// ============================
 
 function emitirMensaje(texto){
 
@@ -189,11 +143,6 @@ pantalla.innerHTML+=`<div>> ${texto}</div>`;
 }
 
 }
-
-
-// ============================
-// EFECTO LUCES
-// ============================
 
 function flashLuces(){
 
