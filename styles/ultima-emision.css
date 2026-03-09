@@ -6,7 +6,6 @@
 
 overflow:visible !important;
 height:auto !important;
-
 padding:0 !important;
 
 background:transparent;
@@ -52,7 +51,6 @@ left:120px;
 width:660px;
 
 display:flex;
-
 justify-content:space-between;
 
 }
@@ -83,39 +81,38 @@ animation:flash 0.4s ease-in-out 3;
 @keyframes flash{
 
 0%{opacity:1}
-
 50%{opacity:0.3}
-
 100%{opacity:1}
 
 }
 
 
 /* ============================
-   PANTALLA CRT
+   PANTALLA CRT (AJUSTADA)
 ============================ */
 
 .radio-screen{
 
 position:absolute;
 
-top:205px;
-left:455px;
+top:150px;
+left:520px;
 
-width:320px;
-height:200px;
+width:250px;
+height:160px;
 
 background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
-background-size:cover;
+
+background-size:100% 100%;
 background-repeat:no-repeat;
 
-padding:15px;
+padding:10px;
 
 color:#00ff9c;
 
-text-shadow:0 0 8px #00ff9c;
+text-shadow:0 0 6px #00ff9c;
 
-font-size:14px;
+font-size:13px;
 
 overflow:hidden;
 
@@ -136,7 +133,6 @@ left:260px;
 width:380px;
 
 display:flex;
-
 justify-content:space-between;
 
 }
