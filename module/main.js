@@ -79,6 +79,10 @@ Perder Frecuencia
 Interferencia
 </button>
 
+<button id="reset-frecuencias">
+Reiniciar Frecuencias
+</button>
+
 </div>
 
 `,
@@ -97,19 +101,37 @@ f--;
 
 await game.settings.set(MODULE_ID, "frecuencias", f);
 
-ui.notifications.warn("Una frecuencia se ha perdido...");
+ChatMessage.create({
+content: `<b>📻 La señal pierde una frecuencia...</b>`
+});
 
 panel.close();
-
 abrirPanel();
 
 }
 
 });
 
+
 html.find("#interferencia").click(() => {
 
-ui.notifications.info("La señal se distorsiona...");
+ChatMessage.create({
+content: `<i>📻 La señal se distorsiona... algo se escucha entre la estática.</i>`
+});
+
+});
+
+
+html.find("#reset-frecuencias").click(async () => {
+
+await game.settings.set(MODULE_ID, "frecuencias", 6);
+
+ChatMessage.create({
+content: `<b>📻 La señal vuelve a estabilizarse.</b>`
+});
+
+panel.close();
+abrirPanel();
 
 });
 
