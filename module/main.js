@@ -1,8 +1,10 @@
 // ======================================
-// LA ÚLTIMA EMISIÓN - FOUNDRY MODULE
+// LA ÚLTIMA EMISIÓN - CONTROL PANEL
 // ======================================
 
 const MODULE_ID = "ultima-emision";
+
+let panel;
 
 
 // ================================
@@ -14,11 +16,11 @@ Hooks.once("init", () => {
 console.log("La Última Emisión | Init");
 
 game.settings.register(MODULE_ID, "frecuencias", {
-  name: "Frecuencias restantes",
-  scope: "world",
-  config: false,
-  type: Number,
-  default: 6
+name: "Frecuencias restantes",
+scope: "world",
+config: false,
+type: Number,
+default: 6
 });
 
 });
@@ -34,38 +36,13 @@ console.log("La Última Emisión | Ready");
 
 ui.notifications.info("La Última Emisión cargada");
 
-});
-
-
-// ================================
-// AÑADIR BOTÓN A CONTROLES EXISTENTES
-// ================================
-
-Hooks.on("getSceneControlButtons", (controls) => {
-
-const tokenControls = controls.find(c => c.name === "token");
-
-if (!tokenControls) return;
-
-tokenControls.tools.push({
-
-  name: "ultima-emision",
-
-  title: "La Última Emisión",
-
-  icon: "fas fa-broadcast-tower",
-
-  button: true,
-
-  onClick: () => abrirPanel()
-
-});
+abrirPanel();
 
 });
 
 
 // ================================
-// PANEL DE EMISIÓN
+// ABRIR PANEL
 // ================================
 
 function abrirPanel() {
@@ -75,22 +52,22 @@ let frecuencias = game.settings.get(MODULE_ID, "frecuencias");
 let luces = "";
 
 for (let i = 0; i < frecuencias; i++) {
-  luces += "🔴 ";
+luces += "🔴 ";
 }
 
-new Dialog({
+panel = new Dialog({
 
 title: "📻 La Última Emisión",
 
 content: `
 
-<div>
+<div class="ultima-emision-panel">
 
 <h2>LA ÚLTIMA EMISIÓN</h2>
 
 <p><b>Frecuencias activas</b></p>
 
-<div style="font-size:30px">${luces}</div>
+<div style="font-size:32px">${luces}</div>
 
 <br>
 
@@ -106,6 +83,8 @@ Interferencia
 
 `,
 
+buttons: {},
+
 render: html => {
 
 html.find("#perder-frecuencia").click(async () => {
@@ -119,6 +98,8 @@ f--;
 await game.settings.set(MODULE_ID, "frecuencias", f);
 
 ui.notifications.warn("Una frecuencia se ha perdido...");
+
+panel.close();
 
 abrirPanel();
 
@@ -134,6 +115,8 @@ ui.notifications.info("La señal se distorsiona...");
 
 }
 
-}).render(true);
+});
+
+panel.render(true);
 
 }
