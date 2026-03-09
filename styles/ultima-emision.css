@@ -188,7 +188,6 @@
 
   color:#111;
 
-  font-size:18px;
   font-weight:900;
 
   text-align:center;
@@ -210,6 +209,8 @@
   left:505px;
   bottom:32px;
 
+  font-size:15px;
+
 }
 
 
@@ -220,7 +221,7 @@
   left:610px;
   bottom:32px;
 
-  font-size:16px;   /* texto más pequeño para que quepa */
+  font-size:14px;
 
 }
 
@@ -229,8 +230,10 @@
 
 .radio-buttons button:nth-child(3){
 
-  left:740px;
+  left:730px;
   bottom:34px;
+
+  font-size:18px;
 
 }
 
