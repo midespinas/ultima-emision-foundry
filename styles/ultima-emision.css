@@ -88,31 +88,31 @@ animation:flash 0.4s ease-in-out 3;
 
 
 /* ============================
-   PANTALLA CRT (AJUSTADA)
+   PANTALLA CRT (SUPERPUESTA)
 ============================ */
 
 .radio-screen{
 
 position:absolute;
 
-top:140px;
-left:540px;
+top:115px;
+left:480px;
 
-width:285px;
-height:180px;
+width:330px;
+height:235px;
 
 background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
 
 background-size:100% 100%;
 background-repeat:no-repeat;
 
-padding:12px;
+padding:20px;
 
 color:#00ff9c;
 
-text-shadow:0 0 6px #00ff9c;
+text-shadow:0 0 8px #00ff9c;
 
-font-size:13px;
+font-size:14px;
 
 overflow:hidden;
 
