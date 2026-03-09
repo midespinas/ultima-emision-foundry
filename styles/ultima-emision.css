@@ -38,10 +38,10 @@
 
   position:absolute;
 
-  top:32px;        /* un poco más arriba */
-  left:95px;       /* desplazadas bastante a la izquierda */
+  top:32px;
+  left:70px;      /* más a la izquierda */
 
-  width:650px;     /* más espacio para separarlas correctamente */
+  width:600px;    /* más estrecho → luces más juntas */
 
   display:flex;
   justify-content:space-between;
@@ -50,7 +50,7 @@
 
 .radio-light{
 
-  width:72px;      /* más grandes para cubrir el marco inferior */
+  width:72px;
   height:72px;
 
   object-fit:contain;
