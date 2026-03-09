@@ -193,8 +193,8 @@
 
   color:#0e0e0e;
 
-  font-size:18px;     /* texto más grande */
-  font-weight:900;    /* negrita fuerte */
+  font-size:18px;
+  font-weight:900;
 
   letter-spacing:0.5px;
 
@@ -210,32 +210,32 @@
    POSICIÓN BOTONES
 ============================ */
 
-/* PERDER FRECUENCIA (sube un poco) */
+/* PERDER FRECUENCIA */
 
 .radio-buttons button:nth-child(1){
 
-  left:430px;
-  bottom:70px;
+  left:438px;
+  bottom:66px;
 
 }
 
 
-/* INTERFERENCIA (sube un poco) */
+/* INTERFERENCIA */
 
 .radio-buttons button:nth-child(2){
 
-  left:520px;
-  bottom:70px;
+  left:540px;
+  bottom:66px;
 
 }
 
 
-/* REINICIAR (baja más y se mueve a la derecha) */
+/* REINICIAR */
 
 .radio-buttons button:nth-child(3){
 
-  left:720px;   /* más a la derecha */
-  bottom:40px;  /* más abajo */
+  left:720.5px;
+  bottom:38px;
 
   width:130px;
   height:110px;
