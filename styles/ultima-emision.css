@@ -1,44 +1,67 @@
-.ultima-emision-panel {
-
-background: #0a0a0a;
-color: #e3e3e3;
-
-border: 2px solid #550000;
-
-padding: 15px;
-
-font-family: Courier, monospace;
-
-box-shadow: 0 0 20px #440000;
-
+.radio-console{
+background:#111;
+border:3px solid #600;
+padding:20px;
+font-family:monospace;
+color:#eee;
 }
 
-.ultima-emision-button {
-
-background: #220000;
-
-color: #ff4444;
-
-border: 1px solid #770000;
-
-padding: 5px;
-
-margin-top: 5px;
-
-cursor: pointer;
-
+.radio-title{
+text-align:center;
+letter-spacing:3px;
+border-bottom:1px solid #600;
+padding-bottom:10px;
 }
 
-.ultima-emision-button:hover {
-
-background: #440000;
-
+.radio-lights{
+display:flex;
+justify-content:space-between;
+margin:20px 0;
 }
 
-.frecuencias {
+.radio-light{
+width:40px;
+height:40px;
+border-radius:50%;
+}
 
-font-size: 25px;
+.radio-light.on{
+background:#ff3a3a;
+box-shadow:0 0 15px red;
+}
 
-letter-spacing: 5px;
+.radio-light.off{
+background:#300;
+opacity:0.4;
+}
 
+.signal-meter{
+height:10px;
+background:#222;
+margin-bottom:15px;
+}
+
+.signal-bar{
+height:100%;
+background:#ff4444;
+}
+
+.radio-screen{
+background:#001100;
+color:#00ff9c;
+height:120px;
+padding:10px;
+overflow:auto;
+font-family:monospace;
+border:2px inset #030;
+}
+
+.radio-buttons{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.radio-buttons button{
+flex:1;
 }
