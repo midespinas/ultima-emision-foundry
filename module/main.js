@@ -46,8 +46,8 @@ pantalla.scrollTop=pantalla.scrollHeight;
 }
 
 
-// PANEL
-function abrirPanel(){
+// CREAR LUCES
+function generarLuces(){
 
 let frecuencias=game.settings.get(MODULE_ID,"frecuencias");
 
@@ -64,6 +64,13 @@ src="modules/ultima-emision/assets/light-${estado}.webp">
 
 }
 
+return luces;
+
+}
+
+
+// PANEL
+function abrirPanel(){
 
 let contenido=`
 
@@ -71,8 +78,8 @@ let contenido=`
 
 <h2 class="radio-title">LA ÚLTIMA EMISIÓN</h2>
 
-<div class="radio-lights">
-${luces}
+<div class="radio-lights" id="radio-lights">
+${generarLuces()}
 </div>
 
 <div id="radio-screen" class="radio-screen">
@@ -92,7 +99,6 @@ ${luces}
 </div>
 
 `;
-
 
 panel=new Dialog({
 
@@ -114,8 +120,7 @@ await game.settings.set(MODULE_ID,"frecuencias",f);
 
 emitirMensaje("Una frecuencia se ha perdido");
 
-panel.close();
-abrirPanel();
+actualizarPanel();
 
 }
 
@@ -135,8 +140,7 @@ await game.settings.set(MODULE_ID,"frecuencias",6);
 
 emitirMensaje("La señal vuelve a estabilizarse");
 
-panel.close();
-abrirPanel();
+actualizarPanel();
 
 });
 
@@ -148,5 +152,19 @@ resizable:true
 });
 
 panel.render(true);
+
+}
+
+
+// ACTUALIZAR PANEL SIN RECREARLO
+function actualizarPanel(){
+
+const luces=document.querySelector("#radio-lights");
+
+if(luces){
+
+luces.innerHTML=generarLuces();
+
+}
 
 }
