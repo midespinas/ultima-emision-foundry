@@ -18,6 +18,7 @@
   "styles": [
     "styles/ultima-emision.css"
   ],
-  "manifest": "https://raw.githubusercontent.com/TUUSUARIO/ultima-emision-foundry/main/module.json",
-  "download": "https://github.com/TUUSUARIO/ultima-emision-foundry/archive/refs/heads/main.zip"
+  "manifest": "https://raw.githubusercontent.com/midespinas/ultima-emision-foundry/main/module.json",
+  "download": "https://github.com/midespinas/ultima-emision-foundry/archive/refs/heads/main.zip"
+
 }
