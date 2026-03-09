@@ -45,10 +45,10 @@ font-family:monospace;
 
 position:absolute;
 
-top:90px;
-left:120px;
+top:55px;
+left:150px;
 
-width:660px;
+width:610px;
 
 display:flex;
 justify-content:space-between;
@@ -68,7 +68,8 @@ object-fit:contain;
 
 filter:
 drop-shadow(0 0 6px red)
-drop-shadow(0 0 16px red);
+drop-shadow(0 0 14px red)
+drop-shadow(0 0 22px rgba(255,0,0,0.6));
 
 }
 
@@ -88,7 +89,7 @@ animation:flash 0.4s ease-in-out 3;
 
 
 /* ============================
-   PANTALLA CRT (SUPERPUESTA)
+   PANTALLA CRT
 ============================ */
 
 .radio-screen{
@@ -109,12 +110,66 @@ background-repeat:no-repeat;
 padding:22px;
 
 color:#00ff9c;
-
-text-shadow:0 0 8px #00ff9c;
-
 font-size:15px;
 
+text-shadow:0 0 6px #00ff9c;
+
 overflow:hidden;
+
+border-radius:18px;
+
+box-shadow:
+inset 0 0 40px rgba(0,0,0,0.85),
+inset 0 0 20px rgba(0,0,0,0.6),
+0 0 10px rgba(0,0,0,0.7);
+
+}
+
+
+/* ============================
+   EFECTO LINEAS CRT
+============================ */
+
+.radio-screen::after{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(0,0,0,0.15),
+rgba(0,0,0,0.15) 1px,
+transparent 1px,
+transparent 3px
+);
+
+pointer-events:none;
+
+opacity:0.35;
+
+}
+
+
+/* ============================
+   PARPADEO CRT
+============================ */
+
+.radio-screen{
+
+animation:crt-flicker 6s infinite;
+
+}
+
+@keyframes crt-flicker{
+
+0%{opacity:1}
+97%{opacity:1}
+98%{opacity:0.95}
+99%{opacity:0.98}
+100%{opacity:1}
 
 }
 
