@@ -15,7 +15,6 @@
 ============================ */
 
 .radio-console{
-
   background-image:url("/modules/ultima-emision/assets/radio-console.webp");
   background-size:100% 100%;
   background-repeat:no-repeat;
@@ -28,7 +27,6 @@
   margin:auto;
 
   font-family:monospace;
-
 }
 
 
@@ -37,43 +35,35 @@
 ============================ */
 
 .radio-lights{
-
   position:absolute;
 
   top:40px;
-  left:165px;   /* desplazadas más hacia la izquierda */
+  left:150px;   /* desplazadas un poco más a la izquierda */
 
   width:540px;
 
   display:flex;
   justify-content:space-between;
-
 }
 
 .radio-light{
-
   width:62px;
   height:62px;
 
   object-fit:contain;
-
   border-radius:50%;
 
-  /* integración con el metal del panel */
-
+  /* suavizado del borde para integrarse con el panel */
   box-shadow:
     inset 0 0 12px rgba(0,0,0,0.65),
     inset 0 0 6px rgba(0,0,0,0.45);
-
 }
 
 .radio-light.on{
-
   filter:
     drop-shadow(0 0 6px red)
     drop-shadow(0 0 14px red)
     drop-shadow(0 0 22px rgba(255,0,0,0.6));
-
 }
 
 .radio-light.flash{
@@ -92,14 +82,13 @@
 ============================ */
 
 .radio-screen{
-
   position:absolute;
 
-  top:115px;
-  left:480px;
+  top:110px;
+  left:470px;
 
-  width:380px;
-  height:270px;
+  width:400px;
+  height:285px;
 
   background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
   background-size:100% 100%;
@@ -116,39 +105,35 @@
 
   border-radius:18px;
 
-  /* borde suavizado */
-
+  /* borde suavizado e integración con el panel */
   box-shadow:
     inset 0 0 45px rgba(0,0,0,0.9),
     inset 0 0 20px rgba(0,0,0,0.7),
     0 0 8px rgba(0,0,0,0.6);
-
 }
 
 
 /* ============================
-   EFECTO LINEAS CRT
+   EFECTO LÍNEAS CRT
 ============================ */
 
 .radio-screen::after{
-
   content:"";
 
   position:absolute;
   inset:0;
 
   background:
-  repeating-linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0.15) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
 
   pointer-events:none;
   opacity:0.35;
-
 }
 
 
@@ -161,13 +146,11 @@
 }
 
 @keyframes crt-flicker{
-
   0%{opacity:1}
   97%{opacity:1}
   98%{opacity:0.95}
   99%{opacity:0.98}
   100%{opacity:1}
-
 }
 
 
@@ -176,7 +159,6 @@
 ============================ */
 
 .radio-buttons{
-
   position:absolute;
 
   bottom:45px;
@@ -186,11 +168,9 @@
 
   display:flex;
   justify-content:space-between;
-
 }
 
 .radio-buttons button{
-
   background:#d9d7cf;
 
   border:2px solid #999;
@@ -200,7 +180,6 @@
 
   font-weight:bold;
   cursor:pointer;
-
 }
 
 .radio-buttons button:hover{
