@@ -38,7 +38,7 @@
   position:absolute;
 
   top:40px;
-  left:210px;  /* desplazamiento lateral hacia la derecha */
+  left:195px;  /* movido ligeramente hacia la izquierda */
 
   width:540px;
 
@@ -54,12 +54,10 @@
 
   border-radius:50%;
 
-  /* integración visual */
-
+  /* suavizado del borde para integrarse con el panel */
   box-shadow:
-    inset 0 0 12px rgba(0,0,0,0.6),
-    inset 0 0 6px rgba(0,0,0,0.4);
-
+    inset 0 0 12px rgba(0,0,0,0.65),
+    inset 0 0 6px rgba(0,0,0,0.45);
 }
 
 .radio-light.on{
@@ -108,10 +106,11 @@
 
   border-radius:18px;
 
+  /* borde suavizado para integrarse con el panel */
   box-shadow:
-    inset 0 0 40px rgba(0,0,0,0.85),
-    inset 0 0 20px rgba(0,0,0,0.6),
-    0 0 10px rgba(0,0,0,0.7);
+    inset 0 0 45px rgba(0,0,0,0.9),
+    inset 0 0 20px rgba(0,0,0,0.7),
+    0 0 8px rgba(0,0,0,0.6);
 }
 
 
