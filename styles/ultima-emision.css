@@ -214,7 +214,7 @@
 
 .radio-buttons button:nth-child(1){
   left:442px;
-  bottom:60px;
+  bottom:52px;
 }
 
 
@@ -222,7 +222,7 @@
 
 .radio-buttons button:nth-child(2){
   left:546px;
-  bottom:60px;
+  bottom:52px;
 }
 
 
@@ -231,7 +231,7 @@
 .radio-buttons button:nth-child(3){
 
   left:721px;
-  bottom:32px;
+  bottom:24px;
 
   width:130px;
   height:110px;
