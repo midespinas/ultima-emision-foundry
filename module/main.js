@@ -6,37 +6,41 @@ let panel;
 // INIT
 Hooks.once("init", () => {
 
-game.settings.register(MODULE_ID, "frecuencias", {
-name: "Frecuencias",
-scope: "world",
-config: false,
-type: Number,
-default: 6
+game.settings.register(MODULE_ID,"frecuencias",{
+name:"Frecuencias",
+scope:"world",
+config:false,
+type:Number,
+default:6
 });
 
 });
 
 
 // READY
-Hooks.once("ready", () => {
+Hooks.once("ready",()=>{
 
+console.log("Ultima Emision lista");
+
+setTimeout(()=>{
 abrirPanel();
+},300);
 
 });
 
 
-// MENSAJE GLOBAL
+// MENSAJES
 function emitirMensaje(texto){
 
 ChatMessage.create({
-content: `<b>📻 ${texto}</b>`
+content:`<b>📻 ${texto}</b>`
 });
 
-const pantalla = document.querySelector("#radio-screen");
+const pantalla=document.querySelector("#radio-screen");
 
 if(pantalla){
-pantalla.innerHTML += `<div>> ${texto}</div>`;
-pantalla.scrollTop = pantalla.scrollHeight;
+pantalla.innerHTML+=`<div>> ${texto}</div>`;
+pantalla.scrollTop=pantalla.scrollHeight;
 }
 
 }
@@ -45,25 +49,23 @@ pantalla.scrollTop = pantalla.scrollHeight;
 // PANEL
 function abrirPanel(){
 
-let frecuencias = game.settings.get(MODULE_ID,"frecuencias");
+let frecuencias=game.settings.get(MODULE_ID,"frecuencias");
 
 let luces="";
 
 for(let i=0;i<6;i++){
 
-if(i<frecuencias){
-luces+=`<div class="radio-light on"></div>`;
-}else{
-luces+=`<div class="radio-light off"></div>`;
-}
+let estado=i<frecuencias?"on":"off";
+
+luces+=`
+<img class="radio-light"
+src="modules/ultima-emision/assets/light-${estado}.webp">
+`;
 
 }
 
-panel = new Dialog({
 
-title:"📻 La Última Emisión",
-
-content:`
+let contenido=`
 
 <div class="radio-console">
 
@@ -71,10 +73,6 @@ content:`
 
 <div class="radio-lights">
 ${luces}
-</div>
-
-<div class="signal-meter">
-<div class="signal-bar" style="width:${frecuencias*16}%"></div>
 </div>
 
 <div id="radio-screen" class="radio-screen">
@@ -92,13 +90,21 @@ ${luces}
 </div>
 
 </div>
-`,
 
-render: html=>{
+`;
+
+
+panel=new Dialog({
+
+title:"📻 La Última Emisión",
+
+content:contenido,
+
+render:html=>{
 
 html.find("#perder").click(async()=>{
 
-let f = game.settings.get(MODULE_ID,"frecuencias");
+let f=game.settings.get(MODULE_ID,"frecuencias");
 
 if(f>0){
 
@@ -120,12 +126,6 @@ html.find("#interferencia").click(()=>{
 
 emitirMensaje("La señal se llena de estática");
 
-AudioHelper.play({
-src:"modules/ultima-emision/sounds/radio-static.mp3",
-volume:0.8,
-loop:false
-});
-
 });
 
 
@@ -143,8 +143,7 @@ abrirPanel();
 }
 
 },{
-width:650,
-height:"auto",
+width:720,
 resizable:true
 });
 
