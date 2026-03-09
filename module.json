@@ -2,7 +2,7 @@
   "id": "ultima-emision",
   "title": "La Última Emisión",
   "description": "Módulo narrativo de terror radiofónico para Foundry VTT",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "authors": [
     {
       "name": "Sr. Midespinas",
@@ -26,6 +26,7 @@
   "manifest": "https://raw.githubusercontent.com/midespinas/ultima-emision-foundry/main/module.json",
   "download": "https://github.com/midespinas/ultima-emision-foundry/archive/refs/heads/main.zip"
 }
+
 
 
 
