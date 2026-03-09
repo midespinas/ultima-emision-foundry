@@ -5,28 +5,28 @@
 const MODULE_ID = "ultima-emision";
 
 
-// ================================
+// ======================================
 // INIT
-// ================================
+// ======================================
 
 Hooks.once("init", () => {
 
 console.log("La Última Emisión | Init");
 
 game.settings.register(MODULE_ID, "frecuencias", {
-name: "Frecuencias restantes",
-scope: "world",
-config: false,
-type: Number,
-default: 6
+  name: "Frecuencias restantes",
+  scope: "world",
+  config: false,
+  type: Number,
+  default: 6
 });
 
 });
 
 
-// ================================
+// ======================================
 // READY
-// ================================
+// ======================================
 
 Hooks.once("ready", () => {
 
@@ -37,42 +37,26 @@ ui.notifications.info("La Última Emisión cargada");
 });
 
 
-// ================================
-// SCENE CONTROLS
-// ================================
+// ======================================
+// BOTÓN EN BARRA IZQUIERDA
+// ======================================
 
 Hooks.on("getSceneControlButtons", (controls) => {
 
 controls.push({
-
-name: "ultima-emision",
-
-title: "La Última Emisión",
-
-icon: "fas fa-broadcast-tower",
-
-activeTool: "abrir",
-
-tools: [
-
-{
-name: "abrir",
-title: "Abrir Emisión",
-icon: "fas fa-radio",
-button: true,
-onClick: () => abrirPanel()
-}
-
-]
-
+  name: "ultima-emision",
+  title: "La Última Emisión",
+  icon: "fas fa-broadcast-tower",
+  button: true,
+  onClick: () => abrirPanel()
 });
 
 });
 
 
-// ================================
+// ======================================
 // PANEL DE EMISIÓN
-// ================================
+// ======================================
 
 function abrirPanel() {
 
@@ -81,7 +65,7 @@ let frecuencias = game.settings.get(MODULE_ID, "frecuencias");
 let luces = "";
 
 for (let i = 0; i < frecuencias; i++) {
-luces += "🔴 ";
+  luces += "🔴 ";
 }
 
 new Dialog({
