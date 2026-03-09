@@ -1,52 +1,23 @@
 {
   "id": "ultima-emision",
   "title": "La Última Emisión",
-  "description": "Módulo narrativo de terror radiofónico para Foundry VTT",
-  "version": "0.3.4",
+  "description": "Panel narrativo de radio para partidas de terror en Foundry VTT",
+  "version": "0.2.0",
   "authors": [
     {
-      "name": "Sr. Midespinas",
-      "url": "https://github.com/midespinas"
+      "name": "Sr. Midespinas"
     }
   ],
   "compatibility": {
     "minimum": "12",
     "verified": "12"
   },
-  "relationships": {
-    "systems": []
-  },
-  "esmodules": [
+  "scripts": [
     "module/main.js"
   ],
   "styles": [
     "styles/ultima-emision.css"
   ],
-  "url": "https://github.com/midespinas/ultima-emision-foundry",
   "manifest": "https://raw.githubusercontent.com/midespinas/ultima-emision-foundry/main/module.json",
   "download": "https://github.com/midespinas/ultima-emision-foundry/archive/refs/heads/main.zip"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
