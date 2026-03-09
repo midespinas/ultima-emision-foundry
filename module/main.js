@@ -2,15 +2,11 @@
 // LA ÚLTIMA EMISIÓN - FOUNDY MODULE
 // ======================================
 
-// ================================
-// CONFIGURACIÓN
-// ================================
-
 const MODULE_ID = "ultima-emision";
 
 
 // ================================
-// INICIO DEL MÓDULO
+// INIT
 // ================================
 
 Hooks.once("init", () => {
@@ -29,7 +25,7 @@ default: 6
 
 
 // ================================
-// CUANDO FOUNDY ESTÁ LISTO
+// READY
 // ================================
 
 Hooks.once("ready", () => {
@@ -42,7 +38,7 @@ ui.notifications.info("La Última Emisión cargada");
 
 
 // ================================
-// BOTÓN EN BARRA IZQUIERDA
+// SCENE CONTROLS
 // ================================
 
 Hooks.on("getSceneControlButtons", (controls) => {
@@ -55,7 +51,7 @@ title: "La Última Emisión",
 
 icon: "fas fa-broadcast-tower",
 
-layer: "ultima-emision",
+activeTool: "abrir",
 
 tools: [
 
@@ -75,7 +71,7 @@ onClick: () => abrirPanel()
 
 
 // ================================
-// PANEL DE RADIO
+// PANEL DE EMISIÓN
 // ================================
 
 function abrirPanel() {
@@ -94,7 +90,7 @@ title: "📻 La Última Emisión",
 
 content: `
 
-<div class="ultima-emision-panel">
+<div>
 
 <h2>LA ÚLTIMA EMISIÓN</h2>
 
