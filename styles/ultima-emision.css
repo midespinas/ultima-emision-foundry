@@ -1,15 +1,28 @@
+/* ============================
+   VENTANA FOUNDRY
+============================ */
+
 .window-app .window-content{
+
 overflow:visible !important;
 height:auto !important;
+
+padding:0 !important;
+
+background:transparent;
+
 }
 
-/* PANEL PRINCIPAL */
+
+/* ============================
+   PANEL CONSOLA
+============================ */
 
 .radio-console{
 
 background-image:url("/modules/ultima-emision/assets/radio-console.webp");
 
-background-size:contain;
+background-size:100% 100%;
 background-repeat:no-repeat;
 background-position:center;
 
@@ -24,7 +37,10 @@ font-family:monospace;
 
 }
 
-/* LUCES */
+
+/* ============================
+   LUCES
+============================ */
 
 .radio-lights{
 
@@ -74,7 +90,10 @@ animation:flash 0.4s ease-in-out 3;
 
 }
 
-/* CRT */
+
+/* ============================
+   PANTALLA CRT
+============================ */
 
 .radio-screen{
 
@@ -87,8 +106,8 @@ width:320px;
 height:200px;
 
 background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
-
 background-size:cover;
+background-repeat:no-repeat;
 
 padding:15px;
 
@@ -102,7 +121,10 @@ overflow:hidden;
 
 }
 
-/* BOTONES */
+
+/* ============================
+   BOTONES
+============================ */
 
 .radio-buttons{
 
