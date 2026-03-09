@@ -5,20 +5,24 @@
   "version": "0.1.0",
   "authors": [
     {
-      "name": "Sr. Midespinas"
+      "name": "Sr. Midespinas",
+      "url": "https://github.com/midespinas"
     }
   ],
   "compatibility": {
     "minimum": "12",
     "verified": "12"
   },
-  "scripts": [
+  "relationships": {
+    "systems": []
+  },
+  "esmodules": [
     "module/main.js"
   ],
   "styles": [
     "styles/ultima-emision.css"
   ],
+  "url": "https://github.com/midespinas/ultima-emision-foundry",
   "manifest": "https://raw.githubusercontent.com/midespinas/ultima-emision-foundry/main/module.json",
   "download": "https://github.com/midespinas/ultima-emision-foundry/archive/refs/heads/main.zip"
-
 }
