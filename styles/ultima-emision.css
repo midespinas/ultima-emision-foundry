@@ -170,10 +170,10 @@
 
   position:absolute;
 
-  bottom:70px;   /* sube los botones para encajar en el panel */
-  left:380px;    /* desplaza hacia la derecha */
+  bottom:40px;     /* baja los botones */
+  left:520px;      /* desplaza a la derecha */
 
-  width:420px;
+  width:260px;     /* más estrecho → botones más juntos */
 
   display:flex;
   justify-content:space-between;
@@ -189,8 +189,8 @@
   border:none;
   box-shadow:none;
 
-  width:120px;
-  height:60px;
+  width:85px;
+  height:70px;
 
   cursor:pointer;
 
