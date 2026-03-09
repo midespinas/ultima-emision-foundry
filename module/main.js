@@ -1,3 +1,15 @@
+// ===============================
+// LA ÚLTIMA EMISIÓN - MAIN SCRIPT
+// ===============================
+
+// Número inicial de frecuencias
+let frecuencias = 6;
+
+
+// ===============================
+// CUANDO EL MÓDULO SE CARGA
+// ===============================
+
 Hooks.once("ready", () => {
 
 console.log("La Última Emisión | módulo cargado");
@@ -6,10 +18,14 @@ ui.notifications.info("La Última Emisión está activa");
 
 });
 
-// Crear botón en la barra lateral
-Hooks.on("renderSidebarTab", (app, html) => {
 
-if (app.options.id === "chat") {
+// ===============================
+// AÑADIR BOTÓN AL CHAT
+// ===============================
+
+Hooks.on("renderChatLog", (app, html) => {
+
+if (html.find(".ultima-emision-button").length) return;
 
 const button = $(`
 <button class="ultima-emision-button">
@@ -18,39 +34,37 @@ const button = $(`
 `);
 
 button.click(() => {
-
 renderRadioPanel();
+});
+
+html.find(".chat-control-buttons").append(button);
 
 });
 
-html.find(".directory-footer").append(button);
 
-}
+// ===============================
+// PANEL DE EMISIÓN
+// ===============================
 
-});
-
-// FRECUENCIAS
-let frecuencias = 6;
-
-function renderRadioPanel(){
+function renderRadioPanel() {
 
 let luces = "";
 
-for(let i=0;i<frecuencias;i++){
+for (let i = 0; i < frecuencias; i++) {
 luces += "🔴 ";
 }
 
 new Dialog({
 
-title: "La Última Emisión",
+title: "📻 La Última Emisión",
 
 content: `
 
 <div class="ultima-emision-panel">
 
-<h2>📻 LA ÚLTIMA EMISIÓN</h2>
+<h2>LA ÚLTIMA EMISIÓN</h2>
 
-<p>Frecuencias activas:</p>
+<p><strong>Frecuencias activas</strong></p>
 
 <div class="frecuencias">${luces}</div>
 
@@ -64,20 +78,27 @@ content: `
 
 `,
 
+buttons: {},
+
 render: html => {
 
-html.find("#perderFrecuencia").click(()=>{
+html.find("#perderFrecuencia").click(() => {
 
-if(frecuencias > 0){
+if (frecuencias > 0) {
+
 frecuencias--;
+
+ui.notifications.warn("Una frecuencia se ha perdido...");
+
 renderRadioPanel();
+
 }
 
 });
 
-html.find("#interferencia").click(()=>{
+html.find("#interferencia").click(() => {
 
-ui.notifications.warn("La señal se distorsiona...");
+ui.notifications.info("La señal se distorsiona...");
 
 });
 
@@ -86,3 +107,5 @@ ui.notifications.warn("La señal se distorsiona...");
 }).render(true);
 
 }
+}
+
