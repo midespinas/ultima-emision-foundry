@@ -39,7 +39,7 @@
   position:absolute;
 
   top:30px;
-  left:60px;      /* ligeramente más a la derecha */
+  left:60px;
 
   width:540px;
 
@@ -163,37 +163,53 @@
 
 
 /* ============================
-   BOTONES
+   BOTONES PANEL
 ============================ */
 
 .radio-buttons{
 
   position:absolute;
 
-  bottom:45px;
-  left:260px;
+  bottom:70px;   /* sube los botones para encajar en el panel */
+  left:380px;    /* desplaza hacia la derecha */
 
-  width:380px;
+  width:420px;
 
   display:flex;
   justify-content:space-between;
 
 }
 
+
+/* BOTONES INVISIBLES */
+
 .radio-buttons button{
 
-  background:#d9d7cf;
+  background:transparent;
+  border:none;
+  box-shadow:none;
 
-  border:2px solid #999;
-  border-radius:4px;
+  width:120px;
+  height:60px;
 
-  padding:8px 14px;
-
-  font-weight:bold;
   cursor:pointer;
+
+  color:#1a1a1a;
+
+  font-size:14px;
+  font-weight:bold;
+
+  text-align:center;
 
 }
 
+
+/* TEXTO SOBRE BOTÓN */
+
 .radio-buttons button:hover{
-  background:white;
+
+  color:black;
+  text-shadow:
+    0 0 4px rgba(255,255,255,0.5);
+
 }
