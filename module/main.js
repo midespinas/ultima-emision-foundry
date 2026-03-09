@@ -1,17 +1,17 @@
-const MODULE_ID = "ultima-emision";
+const MODULE_ID = "ultima-emision-foundry";
 
 let panel;
 
 
 // ============================
-// APPLICATION PANEL
+// PANEL APPLICATION
 // ============================
 
 class RadioPanel extends Application {
 
 static get defaultOptions() {
 
-return mergeObject(super.defaultOptions,{
+return foundry.utils.mergeObject(super.defaultOptions,{
 id:"radio-panel",
 title:"📻 La Última Emisión",
 width:920,
@@ -23,7 +23,7 @@ resizable:true
 
 
 // ============================
-// DATOS DEL PANEL
+// DATOS
 // ============================
 
 getData(){
@@ -42,7 +42,7 @@ return {luces};
 
 
 // ============================
-// HTML DEL PANEL
+// HTML
 // ============================
 
 _renderInner(){
@@ -55,7 +55,7 @@ data.luces.forEach(l=>{
 
 lucesHTML+=`
 <img class="radio-light"
-src="modules/ultima-emision/assets/light-${l?"on":"off"}.webp">
+src="modules/ultima-emision-foundry/assets/light-${l?"on":"off"}.webp">
 `;
 
 });
