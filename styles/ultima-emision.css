@@ -1,43 +1,175 @@
+/* ============================
+   PANEL GENERAL
+============================ */
+
 .radio-console{
-background:#111;
-padding:20px;
+
+background-image:url("/modules/ultima-emision/assets/radio-panel-bg.webp");
+background-size:cover;
+background-position:center;
+
+padding:40px;
+
+border:4px solid #111;
+border-radius:6px;
+
+box-shadow:
+inset 0 0 40px #000,
+0 0 25px #000;
+
 color:#eee;
-font-family:monospace;
+
+font-family:"Courier New", monospace;
+
 }
+
+
+/* ============================
+   TITULO
+============================ */
 
 .radio-title{
+
 text-align:center;
-letter-spacing:3px;
-border-bottom:1px solid #600;
-margin-bottom:15px;
+
+letter-spacing:4px;
+
+font-size:20px;
+
+margin-bottom:25px;
+
+border-bottom:2px solid #660000;
+
+padding-bottom:10px;
+
+text-shadow:0 0 5px #000;
+
 }
+
+
+/* ============================
+   LUCES DE FRECUENCIA
+============================ */
 
 .radio-lights{
+
 display:flex;
-justify-content:space-between;
-margin-bottom:15px;
+
+justify-content:space-evenly;
+
+align-items:center;
+
+margin-bottom:30px;
+
 }
+
 
 .radio-light{
-width:40px;
-height:40px;
+
+width:60px;
+height:60px;
+
+filter:drop-shadow(0 0 8px red);
+
+transition:all 0.3s ease;
+
 }
+
+
+/* ============================
+   PANTALLA CRT
+============================ */
 
 .radio-screen{
-background:#001100;
-color:#00ff9c;
-height:120px;
-padding:10px;
+
+background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
+
+background-size:cover;
+background-position:center;
+
+height:160px;
+
+padding:15px;
+
+color:#00ff88;
+
+font-family:monospace;
+
+border:3px inset #003300;
+
 overflow:auto;
-border:2px inset #030;
-margin-bottom:15px;
+
+box-shadow:
+inset 0 0 25px #000,
+0 0 15px #001100;
+
+margin-bottom:25px;
+
 }
+
+
+/* ============================
+   TEXTO PANTALLA
+============================ */
+
+.radio-screen div{
+
+margin-bottom:4px;
+
+}
+
+
+/* ============================
+   BOTONES
+============================ */
 
 .radio-buttons{
+
 display:flex;
-gap:10px;
+
+gap:15px;
+
+justify-content:space-between;
+
 }
 
+
 .radio-buttons button{
+
 flex:1;
+
+background:#d9d7cf;
+
+border:2px solid #999;
+
+border-radius:4px;
+
+padding:10px;
+
+font-weight:bold;
+
+font-family:"Courier New", monospace;
+
+cursor:pointer;
+
+transition:all 0.2s ease;
+
+}
+
+
+.radio-buttons button:hover{
+
+background:#ffffff;
+
+box-shadow:0 0 8px #000;
+
+}
+
+
+.radio-buttons button:active{
+
+transform:translateY(2px);
+
+box-shadow:inset 0 0 5px #000;
+
 }
