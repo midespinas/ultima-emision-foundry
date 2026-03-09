@@ -221,11 +221,15 @@
 }
 
 
-/* REINICIAR (movido a la derecha) */
+/* REINICIAR (ajustado) */
 
 .radio-buttons button:nth-child(3){
 
-  left:640px;
+  left:700px;      /* más a la derecha */
+  bottom:55px;     /* sube bastante */
+
+  width:120px;     /* botón más grande */
+  height:90px;
 
 }
 
