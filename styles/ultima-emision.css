@@ -38,10 +38,10 @@
 
   position:absolute;
 
-  top:32px;
-  left:70px;      /* más a la izquierda */
+  top:30px;       /* ligeramente más arriba */
+  left:40px;      /* desplazadas claramente a la izquierda */
 
-  width:600px;    /* más estrecho → luces más juntas */
+  width:540px;    /* menor ancho → luces más juntas */
 
   display:flex;
   justify-content:space-between;
