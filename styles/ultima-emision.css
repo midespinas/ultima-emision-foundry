@@ -1,49 +1,26 @@
 .radio-console{
 background:#111;
-border:3px solid #600;
 padding:20px;
-font-family:monospace;
 color:#eee;
+font-family:monospace;
 }
 
 .radio-title{
 text-align:center;
 letter-spacing:3px;
 border-bottom:1px solid #600;
-padding-bottom:10px;
+margin-bottom:15px;
 }
 
 .radio-lights{
 display:flex;
 justify-content:space-between;
-margin:20px 0;
+margin-bottom:15px;
 }
 
 .radio-light{
 width:40px;
 height:40px;
-border-radius:50%;
-}
-
-.radio-light.on{
-background:#ff3a3a;
-box-shadow:0 0 15px red;
-}
-
-.radio-light.off{
-background:#300;
-opacity:0.4;
-}
-
-.signal-meter{
-height:10px;
-background:#222;
-margin-bottom:15px;
-}
-
-.signal-bar{
-height:100%;
-background:#ff4444;
 }
 
 .radio-screen{
@@ -52,14 +29,13 @@ color:#00ff9c;
 height:120px;
 padding:10px;
 overflow:auto;
-font-family:monospace;
 border:2px inset #030;
+margin-bottom:15px;
 }
 
 .radio-buttons{
 display:flex;
 gap:10px;
-margin-top:15px;
 }
 
 .radio-buttons button{
