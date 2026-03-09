@@ -1,96 +1,93 @@
-// ===============================
-// LA ÚLTIMA EMISIÓN - MAIN SCRIPT
-// ===============================
+// ==========================
+// LA ULTIMA EMISION
+// ==========================
 
-// Número inicial de frecuencias
 let frecuencias = 6;
 
 
-// ===============================
-// CUANDO EL MÓDULO SE CARGA
-// ===============================
+// ==========================
+// CARGA DEL MODULO
+// ==========================
 
 Hooks.once("ready", () => {
 
-console.log("La Última Emisión | módulo cargado");
+console.log("LA ULTIMA EMISION | modulo cargado");
 
 ui.notifications.info("La Última Emisión está activa");
 
 });
 
 
-// ===============================
-// AÑADIR BOTÓN AL CHAT
-// ===============================
+// ==========================
+// BOTON EN CHAT
+// ==========================
 
-Hooks.on("renderChatLog", (app, html) => {
+Hooks.on("renderChatLog", (chatlog, html, data) => {
 
-if (html.find(".ultima-emision-button").length) return;
+if (html.find("#ultima-emision-btn").length) return;
 
-const button = $(`
-<button class="ultima-emision-button">
-📻 Panel de Emisión
+const boton = $(`
+<button id="ultima-emision-btn" style="margin-left:5px;">
+📻 Emisión
 </button>
 `);
 
-button.click(() => {
-renderRadioPanel();
-});
+boton.click(() => abrirPanel());
 
-html.find(".chat-control-buttons").append(button);
+html.find(".chat-control-buttons").append(boton);
 
 });
 
 
-// ===============================
-// PANEL DE EMISIÓN
-// ===============================
+// ==========================
+// PANEL
+// ==========================
 
-function renderRadioPanel() {
+function abrirPanel() {
 
 let luces = "";
 
-for (let i = 0; i < frecuencias; i++) {
+for(let i = 0; i < frecuencias; i++){
 luces += "🔴 ";
 }
 
 new Dialog({
 
-title: "📻 La Última Emisión",
+title: "La Última Emisión",
 
 content: `
+<div>
 
-<div class="ultima-emision-panel">
+<h2>📻 LA ÚLTIMA EMISIÓN</h2>
 
-<h2>LA ÚLTIMA EMISIÓN</h2>
+<p>Frecuencias:</p>
 
-<p><strong>Frecuencias activas</strong></p>
-
-<div class="frecuencias">${luces}</div>
+<div style="font-size:25px">${luces}</div>
 
 <br>
 
-<button id="perderFrecuencia">Perder Frecuencia</button>
+<button id="perder-frecuencia">
+Perder Frecuencia
+</button>
 
-<button id="interferencia">Interferencia</button>
+<button id="interferencia">
+Interferencia
+</button>
 
 </div>
-
 `,
-
-buttons: {},
 
 render: html => {
 
-html.find("#perderFrecuencia").click(() => {
+html.find("#perder-frecuencia").click(() => {
 
-if (frecuencias > 0) {
+if(frecuencias > 0){
 
 frecuencias--;
 
-ui.notifications.warn("Una frecuencia se ha perdido...");
+ui.notifications.warn("La señal se debilita...");
 
-renderRadioPanel();
+abrirPanel();
 
 }
 
@@ -107,5 +104,3 @@ ui.notifications.info("La señal se distorsiona...");
 }).render(true);
 
 }
-}
-
