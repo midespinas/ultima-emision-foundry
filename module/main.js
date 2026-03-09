@@ -1,22 +1,13 @@
-// ======================================
-// LA ÚLTIMA EMISIÓN - CONTROL PANEL
-// ======================================
-
 const MODULE_ID = "ultima-emision";
 
 let panel;
 
 
-// ================================
 // INIT
-// ================================
-
 Hooks.once("init", () => {
 
-console.log("La Última Emisión | Init");
-
 game.settings.register(MODULE_ID, "frecuencias", {
-name: "Frecuencias restantes",
+name: "Frecuencias",
 scope: "world",
 config: false,
 type: Number,
@@ -26,84 +17,96 @@ default: 6
 });
 
 
-// ================================
 // READY
-// ================================
-
 Hooks.once("ready", () => {
-
-console.log("La Última Emisión | Ready");
-
-ui.notifications.info("La Última Emisión cargada");
 
 abrirPanel();
 
 });
 
 
-// ================================
-// ABRIR PANEL
-// ================================
+// MENSAJE GLOBAL
+function emitirMensaje(texto){
 
-function abrirPanel() {
+ChatMessage.create({
+content: `<b>📻 ${texto}</b>`
+});
 
-let frecuencias = game.settings.get(MODULE_ID, "frecuencias");
+const pantalla = document.querySelector("#radio-screen");
 
-let luces = "";
+if(pantalla){
+pantalla.innerHTML += `<div>> ${texto}</div>`;
+pantalla.scrollTop = pantalla.scrollHeight;
+}
 
-for (let i = 0; i < frecuencias; i++) {
-luces += "🔴 ";
+}
+
+
+// PANEL
+function abrirPanel(){
+
+let frecuencias = game.settings.get(MODULE_ID,"frecuencias");
+
+let luces="";
+
+for(let i=0;i<6;i++){
+
+if(i<frecuencias){
+luces+=`<div class="radio-light on"></div>`;
+}else{
+luces+=`<div class="radio-light off"></div>`;
+}
+
 }
 
 panel = new Dialog({
 
-title: "📻 La Última Emisión",
+title:"📻 La Última Emisión",
 
-content: `
+content:`
 
-<div class="ultima-emision-panel">
+<div class="radio-console">
 
-<h2>LA ÚLTIMA EMISIÓN</h2>
+<h2 class="radio-title">LA ÚLTIMA EMISIÓN</h2>
 
-<p><b>Frecuencias activas</b></p>
+<div class="radio-lights">
+${luces}
+</div>
 
-<div style="font-size:32px">${luces}</div>
+<div class="signal-meter">
+<div class="signal-bar" style="width:${frecuencias*16}%"></div>
+</div>
 
-<br>
+<div id="radio-screen" class="radio-screen">
+<div>> Señal estable</div>
+</div>
 
-<button id="perder-frecuencia">
-Perder Frecuencia
-</button>
+<div class="radio-buttons">
 
-<button id="interferencia">
-Interferencia
-</button>
+<button id="perder">Perder Frecuencia</button>
 
-<button id="reset-frecuencias">
-Reiniciar Frecuencias
-</button>
+<button id="interferencia">Interferencia</button>
+
+<button id="reset">Reiniciar</button>
 
 </div>
 
+</div>
 `,
 
-buttons: {},
+render: html=>{
 
-render: html => {
+html.find("#perder").click(async()=>{
 
-html.find("#perder-frecuencia").click(async () => {
+let f = game.settings.get(MODULE_ID,"frecuencias");
 
-let f = game.settings.get(MODULE_ID, "frecuencias");
-
-if (f > 0) {
+if(f>0){
 
 f--;
 
-await game.settings.set(MODULE_ID, "frecuencias", f);
+await game.settings.set(MODULE_ID,"frecuencias",f);
 
-ChatMessage.create({
-content: `<b>📻 La señal pierde una frecuencia...</b>`
-});
+emitirMensaje("Una frecuencia se ha perdido");
 
 panel.close();
 abrirPanel();
@@ -113,22 +116,24 @@ abrirPanel();
 });
 
 
-html.find("#interferencia").click(() => {
+html.find("#interferencia").click(()=>{
 
-ChatMessage.create({
-content: `<i>📻 La señal se distorsiona... algo se escucha entre la estática.</i>`
+emitirMensaje("La señal se llena de estática");
+
+AudioHelper.play({
+src:"modules/ultima-emision/sounds/radio-static.mp3",
+volume:0.8,
+loop:false
 });
 
 });
 
 
-html.find("#reset-frecuencias").click(async () => {
+html.find("#reset").click(async()=>{
 
-await game.settings.set(MODULE_ID, "frecuencias", 6);
+await game.settings.set(MODULE_ID,"frecuencias",6);
 
-ChatMessage.create({
-content: `<b>📻 La señal vuelve a estabilizarse.</b>`
-});
+emitirMensaje("La señal vuelve a estabilizarse");
 
 panel.close();
 abrirPanel();
@@ -137,6 +142,10 @@ abrirPanel();
 
 }
 
+},{
+width:650,
+height:"auto",
+resizable:true
 });
 
 panel.render(true);
