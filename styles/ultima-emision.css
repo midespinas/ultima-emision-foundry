@@ -35,32 +35,41 @@
 ============================ */
 
 .radio-lights{
+
   position:absolute;
+
   top:30px;
   left:60px;
+
   width:540px;
 
   display:flex;
   justify-content:space-between;
+
 }
 
 .radio-light{
+
   width:72px;
   height:72px;
 
   object-fit:contain;
+
   border-radius:50%;
 
   box-shadow:
     inset 0 0 12px rgba(0,0,0,0.65),
     inset 0 0 6px rgba(0,0,0,0.45);
+
 }
 
 .radio-light.on{
+
   filter:
     drop-shadow(0 0 6px red)
     drop-shadow(0 0 14px red)
     drop-shadow(0 0 26px rgba(255,0,0,0.7));
+
 }
 
 .radio-light.flash{
@@ -79,6 +88,7 @@
 ============================ */
 
 .radio-screen{
+
   position:absolute;
 
   top:110px;
@@ -114,6 +124,7 @@
 ============================ */
 
 .radio-screen::after{
+
   content:"";
 
   position:absolute;
@@ -130,6 +141,7 @@
 
   pointer-events:none;
   opacity:0.35;
+
 }
 
 
@@ -190,6 +202,7 @@
 
   text-shadow:
     0 1px 2px rgba(255,255,255,0.35);
+
 }
 
 
@@ -201,7 +214,7 @@
 
 .radio-buttons button:nth-child(1){
   left:442px;
-  bottom:64px;
+  bottom:60px;
 }
 
 
@@ -209,7 +222,7 @@
 
 .radio-buttons button:nth-child(2){
   left:546px;
-  bottom:64px;
+  bottom:60px;
 }
 
 
@@ -218,10 +231,11 @@
 .radio-buttons button:nth-child(3){
 
   left:721px;
-  bottom:36px;
+  bottom:32px;
 
   width:130px;
   height:110px;
+
 }
 
 
@@ -230,7 +244,9 @@
 ============================ */
 
 .radio-buttons button:hover{
+
   text-shadow:
     0 0 6px rgba(255,255,255,0.6),
     0 0 12px rgba(255,255,255,0.3);
+
 }
