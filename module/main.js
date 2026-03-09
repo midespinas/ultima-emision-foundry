@@ -1,13 +1,14 @@
-// ============================
-// LA ULTIMA EMISION
-// ============================
+// ===================================
+// LA ÚLTIMA EMISIÓN - FOUNDY MODULE
+// ===================================
 
+// Número inicial de frecuencias
 let frecuencias = 6;
 
 
-// ============================
-// MODULO CARGADO
-// ============================
+// ===============================
+// CUANDO EL MÓDULO SE CARGA
+// ===============================
 
 Hooks.once("ready", () => {
 
@@ -20,24 +21,34 @@ crearBoton();
 });
 
 
-// ============================
-// CREAR BOTON EN INTERFAZ
-// ============================
+// ===============================
+// CREAR BOTÓN EN LA INTERFAZ
+// ===============================
 
 function crearBoton() {
 
+if (document.getElementById("ultima-emision-boton")) return;
+
 const boton = document.createElement("button");
+
+boton.id = "ultima-emision-boton";
 
 boton.innerText = "📻 Emisión";
 
 boton.style.position = "fixed";
-boton.style.bottom = "120px";
+boton.style.bottom = "20px";
 boton.style.right = "20px";
-boton.style.zIndex = "100";
-boton.style.padding = "10px";
+
+boton.style.width = "120px";
+boton.style.height = "40px";
+
+boton.style.zIndex = "1000";
+
 boton.style.background = "#300";
 boton.style.color = "#fff";
 boton.style.border = "1px solid #900";
+boton.style.borderRadius = "6px";
+
 boton.style.cursor = "pointer";
 
 boton.onclick = () => abrirPanel();
@@ -47,15 +58,15 @@ document.body.appendChild(boton);
 }
 
 
-// ============================
-// PANEL DE EMISION
-// ============================
+// ===============================
+// ABRIR PANEL DE EMISIÓN
+// ===============================
 
 function abrirPanel() {
 
 let luces = "";
 
-for(let i=0;i<frecuencias;i++){
+for (let i = 0; i < frecuencias; i++) {
 luces += "🔴 ";
 }
 
@@ -65,25 +76,33 @@ title: "La Última Emisión",
 
 content: `
 
+<div>
+
 <h2>📻 LA ÚLTIMA EMISIÓN</h2>
 
-<p>Frecuencias:</p>
+<p><strong>Frecuencias activas</strong></p>
 
 <div style="font-size:28px">${luces}</div>
 
 <br>
 
-<button id="perder">Perder Frecuencia</button>
+<button id="perder-frecuencia">
+Perder Frecuencia
+</button>
 
-<button id="interferencia">Interferencia</button>
+<button id="interferencia">
+Interferencia
+</button>
+
+</div>
 
 `,
 
 render: html => {
 
-html.find("#perder").click(()=>{
+html.find("#perder-frecuencia").click(() => {
 
-if(frecuencias>0){
+if (frecuencias > 0) {
 
 frecuencias--;
 
@@ -95,7 +114,7 @@ abrirPanel();
 
 });
 
-html.find("#interferencia").click(()=>{
+html.find("#interferencia").click(() => {
 
 ui.notifications.info("La señal se distorsiona...");
 
