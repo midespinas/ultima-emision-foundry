@@ -186,15 +186,22 @@
   border:none;
   box-shadow:none;
 
-  width:85px;
-  height:70px;
+  width:100px;
+  height:90px;
 
   cursor:pointer;
 
-  color:#111;
-  font-size:14px;
-  font-weight:bold;
+  color:#0e0e0e;
+
+  font-size:18px;     /* texto más grande */
+  font-weight:900;    /* negrita fuerte */
+
+  letter-spacing:0.5px;
+
   text-align:center;
+
+  text-shadow:
+    0 1px 2px rgba(255,255,255,0.35);
 
 }
 
@@ -203,29 +210,35 @@
    POSICIÓN BOTONES
 ============================ */
 
-/* PERDER FRECUENCIA */
+/* PERDER FRECUENCIA (sube un poco) */
 
 .radio-buttons button:nth-child(1){
+
   left:430px;
+  bottom:70px;
+
 }
 
 
-/* INTERFERENCIA */
+/* INTERFERENCIA (sube un poco) */
 
 .radio-buttons button:nth-child(2){
+
   left:520px;
+  bottom:70px;
+
 }
 
 
-/* REINICIAR (ajuste fino) */
+/* REINICIAR (baja más y se mueve a la derecha) */
 
 .radio-buttons button:nth-child(3){
 
-  left:702px;
-  bottom:53px;
+  left:720px;   /* más a la derecha */
+  bottom:40px;  /* más abajo */
 
-  width:120px;
-  height:90px;
+  width:130px;
+  height:110px;
 
 }
 
@@ -236,6 +249,8 @@
 
 .radio-buttons button:hover{
 
-  text-shadow:0 0 4px rgba(255,255,255,0.5);
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.3);
 
 }
