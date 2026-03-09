@@ -1,68 +1,86 @@
-// ===================================
+// ======================================
 // LA ÚLTIMA EMISIÓN - FOUNDY MODULE
-// ===================================
+// ======================================
 
-// Número inicial de frecuencias
-let frecuencias = 6;
+// ================================
+// CONFIGURACIÓN
+// ================================
+
+const MODULE_ID = "ultima-emision";
 
 
-// ===============================
-// CUANDO EL MÓDULO SE CARGA
-// ===============================
+// ================================
+// INICIO DEL MÓDULO
+// ================================
 
-Hooks.once("ready", () => {
+Hooks.once("init", () => {
 
-console.log("LA ULTIMA EMISION | modulo cargado");
+console.log("La Última Emisión | Init");
 
-ui.notifications.info("La Última Emisión está activa");
-
-crearBoton();
+game.settings.register(MODULE_ID, "frecuencias", {
+name: "Frecuencias restantes",
+scope: "world",
+config: false,
+type: Number,
+default: 6
+});
 
 });
 
 
-// ===============================
-// CREAR BOTÓN EN LA INTERFAZ
-// ===============================
+// ================================
+// CUANDO FOUNDY ESTÁ LISTO
+// ================================
 
-function crearBoton() {
+Hooks.once("ready", () => {
 
-if (document.getElementById("ultima-emision-boton")) return;
+console.log("La Última Emisión | Ready");
 
-const boton = document.createElement("button");
+ui.notifications.info("La Última Emisión cargada");
 
-boton.id = "ultima-emision-boton";
+});
 
-boton.innerText = "📻 Emisión";
 
-boton.style.position = "fixed";
-boton.style.bottom = "20px";
-boton.style.right = "20px";
+// ================================
+// BOTÓN EN BARRA IZQUIERDA
+// ================================
 
-boton.style.width = "120px";
-boton.style.height = "40px";
+Hooks.on("getSceneControlButtons", (controls) => {
 
-boton.style.zIndex = "1000";
+controls.push({
 
-boton.style.background = "#300";
-boton.style.color = "#fff";
-boton.style.border = "1px solid #900";
-boton.style.borderRadius = "6px";
+name: "ultima-emision",
 
-boton.style.cursor = "pointer";
+title: "La Última Emisión",
 
-boton.onclick = () => abrirPanel();
+icon: "fas fa-broadcast-tower",
 
-document.body.appendChild(boton);
+layer: "ultima-emision",
 
+tools: [
+
+{
+name: "abrir",
+title: "Abrir Emisión",
+icon: "fas fa-radio",
+button: true,
+onClick: () => abrirPanel()
 }
 
+]
 
-// ===============================
-// ABRIR PANEL DE EMISIÓN
-// ===============================
+});
+
+});
+
+
+// ================================
+// PANEL DE RADIO
+// ================================
 
 function abrirPanel() {
+
+let frecuencias = game.settings.get(MODULE_ID, "frecuencias");
 
 let luces = "";
 
@@ -72,17 +90,17 @@ luces += "🔴 ";
 
 new Dialog({
 
-title: "La Última Emisión",
+title: "📻 La Última Emisión",
 
 content: `
 
-<div>
+<div class="ultima-emision-panel">
 
-<h2>📻 LA ÚLTIMA EMISIÓN</h2>
+<h2>LA ÚLTIMA EMISIÓN</h2>
 
-<p><strong>Frecuencias activas</strong></p>
+<p><b>Frecuencias activas</b></p>
 
-<div style="font-size:28px">${luces}</div>
+<div style="font-size:30px">${luces}</div>
 
 <br>
 
@@ -100,13 +118,17 @@ Interferencia
 
 render: html => {
 
-html.find("#perder-frecuencia").click(() => {
+html.find("#perder-frecuencia").click(async () => {
 
-if (frecuencias > 0) {
+let f = game.settings.get(MODULE_ID, "frecuencias");
 
-frecuencias--;
+if (f > 0) {
 
-ui.notifications.warn("La señal se debilita...");
+f--;
+
+await game.settings.set(MODULE_ID, "frecuencias", f);
+
+ui.notifications.warn("Una frecuencia se ha perdido...");
 
 abrirPanel();
 
