@@ -1,0 +1,51 @@
+Hooks.once("ready", () => {
+
+console.log("La Última Emisión | módulo cargado");
+
+ui.notifications.info("La Última Emisión está activa");
+
+});
+
+Hooks.on("renderSidebarTab", (app, html) => {
+
+if (app.options.id === "chat") {
+
+const button = $(`
+<button class="ultima-emision-button">
+📻 Abrir Panel de Emisión
+</button>
+`);
+
+button.click(() => {
+
+new Dialog({
+title: "La Última Emisión",
+content: `
+<div class="ultima-emision-panel">
+
+<h2>📻 LA ÚLTIMA EMISIÓN</h2>
+
+<p>Frecuencias activas:</p>
+
+<div class="frecuencias">
+🔴 🔴 🔴 🔴 🔴 🔴
+</div>
+
+<br>
+
+<button id="perderFrecuencia">Perder Frecuencia</button>
+<button id="interferencia">Interferencia</button>
+
+</div>
+`,
+buttons: {}
+
+}).render(true);
+
+});
+
+html.find(".directory-footer").append(button);
+
+}
+
+});

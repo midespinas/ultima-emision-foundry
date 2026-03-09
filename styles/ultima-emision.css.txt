@@ -1,0 +1,44 @@
+.ultima-emision-panel {
+
+background: #0a0a0a;
+color: #e3e3e3;
+
+border: 2px solid #550000;
+
+padding: 15px;
+
+font-family: Courier, monospace;
+
+box-shadow: 0 0 20px #440000;
+
+}
+
+.ultima-emision-button {
+
+background: #220000;
+
+color: #ff4444;
+
+border: 1px solid #770000;
+
+padding: 5px;
+
+margin-top: 5px;
+
+cursor: pointer;
+
+}
+
+.ultima-emision-button:hover {
+
+background: #440000;
+
+}
+
+.frecuencias {
+
+font-size: 25px;
+
+letter-spacing: 5px;
+
+}
