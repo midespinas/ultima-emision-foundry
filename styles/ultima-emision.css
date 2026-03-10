@@ -91,8 +91,8 @@
 
   position:absolute;
 
-  top:95px;
-  left:470px;
+  top:102px;   /* bajado ligeramente */
+  left:485px;  /* desplazado ligeramente a la derecha */
 
   width:380px;
   height:260px;
@@ -200,7 +200,7 @@
 
 #lose-frequency{
 
-  left:500px;
+  left:460px;  /* desplazado a la izquierda */
   bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
@@ -221,7 +221,7 @@
 
 #interference{
 
-  left:650px; /* separación añadida */
+  left:610px;  /* desplazado a la izquierda */
 
   bottom:28px;
 
@@ -243,7 +243,7 @@
 
 #reset-frequency{
 
-  left:800px; /* separación añadida */
+  left:760px;  /* desplazado a la izquierda */
 
   bottom:28px;
 
