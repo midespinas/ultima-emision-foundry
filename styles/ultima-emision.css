@@ -83,24 +83,45 @@
 
 
 /* ============================
-   BARRA SIGNAL
+   MEDIDOR SIGNAL
 ============================ */
 
 .radio-signal{
 
   position:absolute;
 
-  left:120px;
-  top:122px;
+  left:115px;
+  top:120px;
 
-  width:305px;
-  height:16px;
+  width:320px;   /* más largo */
+  height:18px;   /* más ancho */
 
   border-radius:3px;
 
   overflow:hidden;
 
+  /* ZONAS DE COLOR DEL MEDIDOR */
+
+  background:
+  linear-gradient(
+    to right,
+    #ff2b2b 0%,
+    #ff2b2b 20%,
+
+    #ffd400 20%,
+    #ffd400 70%,
+
+    #00ff5a 70%,
+    #00ff5a 100%
+  );
+
 }
+
+
+
+/* ============================
+   LED DE SEÑAL
+============================ */
 
 .radio-signal-bar{
 
@@ -114,14 +135,15 @@
     background 0.3s ease;
 
   box-shadow:
-    0 0 8px rgba(0,255,120,0.7),
+    0 0 10px rgba(0,255,120,0.9),
     inset 0 0 4px rgba(0,0,0,0.7);
 
 }
 
 
+
 /* ============================
-   EFECTO SEGMENTOS LED
+   DIVISIONES DEL MEDIDOR
 ============================ */
 
 .radio-signal::after{
@@ -137,12 +159,12 @@
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.45) 2px,
       transparent 2px,
-      transparent 10px
+      transparent 12px
     );
 
   pointer-events:none;
 
-  opacity:0.45;
+  opacity:0.5;
 
 }
 
