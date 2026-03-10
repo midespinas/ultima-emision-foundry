@@ -95,6 +95,10 @@ class RadioPanel extends Application {
     super.activateListeners(html);
 
 
+    /* ============================
+       PERDER FRECUENCIA
+    ============================ */
+
     html.find("#lose-frequency").click(()=>{
 
       if(this.frequencies>0){
@@ -112,14 +116,38 @@ class RadioPanel extends Application {
     });
 
 
+
+    /* ============================
+       INTERFERENCIA
+    ============================ */
+
     html.find("#interference").click(()=>{
 
       ChatMessage.create({
         content:"📻 La señal se llena de estática."
       });
 
+      const audio = new Audio(`/modules/${MODULE_ID}/sounds/radio-static.mp3`);
+      audio.volume = 0.8;
+      audio.play();
+
+      const lights = html.find(".radio-light");
+
+      const random = Math.floor(Math.random()*lights.length);
+
+      lights.eq(random).addClass("flash");
+
+      setTimeout(()=>{
+        lights.removeClass("flash");
+      },800);
+
     });
 
+
+
+    /* ============================
+       REINICIAR
+    ============================ */
 
     html.find("#reset-frequency").click(()=>{
 
@@ -133,6 +161,11 @@ class RadioPanel extends Application {
 
     });
 
+
+
+    /* ============================
+       BOTÓN LLAMADA
+    ============================ */
 
     html.find("#radio-call").click((ev)=>{
 
@@ -200,8 +233,25 @@ class CallGenerator extends Application {
 
     html.find("#accept-call").click(()=>{
 
-      radioPanel.element.find("#radio-connection")
+      /* ENVIAR DATOS AL CHAT */
+
+      ChatMessage.create({
+        content:`
+        📞 <b>Llamada entrante</b><br>
+        <b>Nombre:</b> ${this.name}<br>
+        <b>Ciudad:</b> ${this.city}
+        `
+      });
+
+
+      /* ENCENDER BOTÓN CONEXIÓN */
+
+      radioPanel.element
+        .find("#radio-connection")
         .addClass("active");
+
+
+      /* ABRIR REGISTRO */
 
       new ConnectionRegister(this.name,this.city).render(true);
 
@@ -282,7 +332,8 @@ class ConnectionRegister extends Application{
 
       log.append(`<div>> ${name} (${city}) → ${note}</div>`);
 
-      radioPanel.element.find("#radio-connection")
+      radioPanel.element
+        .find("#radio-connection")
         .removeClass("active");
 
       this.close();
