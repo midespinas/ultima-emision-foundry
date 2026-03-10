@@ -1,3 +1,5 @@
+Main
+
 const MODULE_ID = "ultima-emision";
 
 class RadioPanel extends Application {
