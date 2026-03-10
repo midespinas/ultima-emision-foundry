@@ -89,17 +89,15 @@
 
   position:absolute;
 
-  left:105px;   /* desplazado ligeramente a la izquierda */
-  top:120px;
+  left:95px;     /* desplazada más a la izquierda */
+  top:126px;     /* ligeramente más abajo */
 
-  width:330px;  /* un poco más largo */
+  width:330px;
   height:18px;
 
   border-radius:3px;
 
   overflow:hidden;
-
-  /* COLORES FIJOS */
 
   background:
   linear-gradient(
@@ -129,7 +127,7 @@
   left:0;
   top:0;
 
-  width:6px;   /* grosor del indicador */
+  width:6px;
   height:100%;
 
   background:#000;
