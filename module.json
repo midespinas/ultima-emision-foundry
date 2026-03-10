@@ -2,7 +2,7 @@
   "id": "ultima-emision",
   "title": "La Última Emisión",
   "description": "Panel narrativo de radio para partidas de terror en Foundry VTT",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "authors": [
     {
       "name": "Sr. Midespinas"
@@ -21,6 +21,7 @@
   "manifest": "https://raw.githubusercontent.com/midespinas/ultima-emision-foundry/main/module.json",
   "download": "https://github.com/midespinas/ultima-emision-foundry/archive/refs/heads/main.zip"
 }
+
 
 
 
