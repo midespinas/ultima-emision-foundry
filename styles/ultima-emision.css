@@ -121,7 +121,6 @@
 }
 
 
-
 /* ============================
    INDICADOR DE FRECUENCIA
 ============================ */
@@ -146,6 +145,32 @@
 
 }
 
+
+/* ============================
+   SEGMENTOS DEL MEDIDOR
+============================ */
+
+.radio-signal::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45) 2px,
+      transparent 2px,
+      transparent 12px
+    );
+
+  pointer-events:none;
+
+  opacity:0.5;
+
+}
 
 
 /* ============================
@@ -186,9 +211,48 @@
 }
 
 
+/* ============================
+   EFECTO CRT
+============================ */
+
+.radio-screen::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+
+  pointer-events:none;
+  opacity:0.35;
+
+}
+
 
 /* ============================
-   BOTONES
+   CONTENEDOR BOTONES
+============================ */
+
+.radio-buttons{
+
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+
+}
+
+
+/* ============================
+   BOTONES BASE
 ============================ */
 
 .radio-buttons button{
@@ -207,12 +271,13 @@
 
   background-color:transparent;
 
+  box-shadow:none;
+
   cursor:pointer;
 
   color:transparent;
 
 }
-
 
 
 /* ============================
@@ -275,7 +340,6 @@
 }
 
 
-
 /* ============================
    BOTÓN LLAMADA
 ============================ */
@@ -298,6 +362,8 @@
   background-repeat:no-repeat;
   background-position:center;
 
+  background-color:transparent;
+
   cursor:pointer;
 
 }
@@ -307,7 +373,6 @@
   background-image:url("/modules/ultima-emision/assets/call-button-on.webp");
 
 }
-
 
 
 /* ============================
@@ -343,7 +408,6 @@
     drop-shadow(0 0 12px red);
 
 }
-
 
 
 /* ============================
