@@ -15,6 +15,7 @@ class RadioPanel extends Application {
     });
   }
 
+
   /* ============================
      HTML DEL PANEL
   ============================ */
@@ -72,6 +73,7 @@ class RadioPanel extends Application {
     return $(html);
   }
 
+
   /* ============================
      ACTUALIZAR LUCES
   ============================ */
@@ -94,35 +96,25 @@ class RadioPanel extends Application {
 
   }
 
+
   /* ============================
-     ACTUALIZAR BARRA SIGNAL
+     ACTUALIZAR MEDIDOR SIGNAL
   ============================ */
 
   updateSignal(html){
 
-    const bar = html.find(".radio-signal-bar");
+    const indicator = html.find(".radio-signal-bar");
 
     const percent = (this.frequencies / 6) * 100;
 
-    bar.css("width", percent + "%");
+    const meterWidth = html.find(".radio-signal").width();
 
-    if(this.frequencies >= 4){
+    const pos = meterWidth * (percent / 100);
 
-      bar.css("background","#00ff5a");
-
-    }
-    else if(this.frequencies >= 2){
-
-      bar.css("background","#ffcc00");
-
-    }
-    else{
-
-      bar.css("background","#ff2b2b");
-
-    }
+    indicator.css("left", pos + "px");
 
   }
+
 
   /* ============================
      EVENTOS
@@ -131,6 +123,7 @@ class RadioPanel extends Application {
   activateListeners(html) {
 
     super.activateListeners(html);
+
 
     /* PERDER FRECUENCIA */
 
@@ -149,6 +142,7 @@ class RadioPanel extends Application {
       }
 
     });
+
 
     /* INTERFERENCIA */
 
@@ -173,6 +167,7 @@ class RadioPanel extends Application {
 
     });
 
+
     /* REINICIAR */
 
     html.find("#reset-frequency").click(() => {
@@ -186,6 +181,7 @@ class RadioPanel extends Application {
       this.updateLights(html);
 
     });
+
 
     /* LLAMADA */
 
@@ -202,6 +198,7 @@ class RadioPanel extends Application {
   }
 
 }
+
 
 
 /* ============================
@@ -224,6 +221,7 @@ class CallGenerator extends Application {
     });
 
   }
+
 
   async _renderInner(data) {
 
@@ -255,9 +253,11 @@ class CallGenerator extends Application {
 
     ];
 
+
     const name = names[Math.floor(Math.random()*names.length)];
     const city = cities[Math.floor(Math.random()*cities.length)];
     const comment = comments[Math.floor(Math.random()*comments.length)];
+
 
     const html = `
     <div class="radio-window">
@@ -282,6 +282,7 @@ class CallGenerator extends Application {
 
   }
 
+
   activateListeners(html){
 
     super.activateListeners(html);
@@ -301,6 +302,7 @@ class CallGenerator extends Application {
   }
 
 }
+
 
 
 /* ============================
