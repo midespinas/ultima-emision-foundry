@@ -121,10 +121,6 @@
 }
 
 
-/* ============================
-   INDICADOR DE FRECUENCIA
-============================ */
-
 .radio-signal-bar{
 
   position:absolute;
@@ -137,18 +133,10 @@
 
   background:#000;
 
-  box-shadow:
-    0 0 4px rgba(0,0,0,0.9),
-    0 0 8px rgba(0,0,0,0.6);
-
   transition:left 0.4s ease;
 
 }
 
-
-/* ============================
-   SEGMENTOS DEL MEDIDOR
-============================ */
 
 .radio-signal::after{
 
@@ -203,56 +191,11 @@
 
   border-radius:18px;
 
-  box-shadow:
-    inset 0 0 45px rgba(0,0,0,0.9),
-    inset 0 0 20px rgba(0,0,0,0.7),
-    0 0 8px rgba(0,0,0,0.6);
-
 }
 
 
 /* ============================
-   EFECTO CRT
-============================ */
-
-.radio-screen::after{
-
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.15),
-      rgba(0,0,0,0.15) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-
-  pointer-events:none;
-  opacity:0.35;
-
-}
-
-
-/* ============================
-   CONTENEDOR BOTONES
-============================ */
-
-.radio-buttons{
-
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-
-}
-
-
-/* ============================
-   BOTONES BASE
+   BOTONES
 ============================ */
 
 .radio-buttons button{
@@ -267,75 +210,9 @@
   background-position:center;
 
   border:none;
-  outline:none;
-
   background-color:transparent;
 
-  box-shadow:none;
-
   cursor:pointer;
-
-  color:transparent;
-
-}
-
-
-/* ============================
-   PERDER FRECUENCIA
-============================ */
-
-#lose-frequency{
-
-  left:430px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
-
-}
-
-#lose-frequency:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-frequency-on.webp");
-
-}
-
-
-/* ============================
-   INTERFERENCIA
-============================ */
-
-#interference{
-
-  left:580px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-interference-off.webp");
-
-}
-
-#interference:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-interference-on.webp");
-
-}
-
-
-/* ============================
-   REINICIAR
-============================ */
-
-#reset-frequency{
-
-  left:730px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-reset-off.webp");
-
-}
-
-#reset-frequency:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-reset-on.webp");
 
 }
 
@@ -362,8 +239,6 @@
   background-repeat:no-repeat;
   background-position:center;
 
-  background-color:transparent;
-
   cursor:pointer;
 
 }
@@ -371,58 +246,5 @@
 .radio-call.active{
 
   background-image:url("/modules/ultima-emision/assets/call-button-on.webp");
-
-}
-
-
-/* ============================
-   BOTÓN CONEXIÓN
-============================ */
-
-.radio-connection{
-
-  position:absolute;
-
-  left:250px;
-  top:205px;
-
-  width:90px;
-  height:80px;
-
-  border:none;
-
-  background-image:url("/modules/ultima-emision/assets/connection-button.webp");
-
-  background-size:contain;
-  background-repeat:no-repeat;
-  background-position:center;
-
-  cursor:pointer;
-
-}
-
-.radio-connection.active{
-
-  filter:
-    drop-shadow(0 0 6px red)
-    drop-shadow(0 0 12px red);
-
-}
-
-
-/* ============================
-   VENTANAS
-============================ */
-
-.radio-window{
-
-  padding:20px;
-  font-family:monospace;
-
-  color:#00ff9c;
-
-  background:#020202;
-
-  border:2px solid #550000;
 
 }
