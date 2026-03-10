@@ -32,6 +32,7 @@
 }
 
 
+
 /* ============================
    LUCES
 ============================ */
@@ -39,7 +40,6 @@
 .radio-lights{
 
   position:absolute;
-
   top:30px;
   left:95px;
 
@@ -56,7 +56,6 @@
   height:72px;
 
   object-fit:contain;
-
   border-radius:50%;
 
 }
@@ -81,6 +80,7 @@
   100%{opacity:1}
 
 }
+
 
 
 /* ============================
@@ -121,6 +121,7 @@
 }
 
 
+
 /* ============================
    EFECTO CRT
 ============================ */
@@ -147,6 +148,7 @@
 }
 
 
+
 /* ============================
    CONTENEDOR BOTONES
 ============================ */
@@ -161,6 +163,7 @@
 }
 
 
+
 /* ============================
    BOTONES BASE
 ============================ */
@@ -169,7 +172,7 @@
 
   position:absolute;
 
-  width:130px;
+  width:140px;
   height:80px;
 
   background-size:contain;
@@ -177,11 +180,18 @@
   background-position:center;
 
   border:none;
+  outline:none;
+
+  background-color:transparent;
+
+  box-shadow:none;
+
   cursor:pointer;
 
   color:transparent;
 
 }
+
 
 
 /* ============================
@@ -190,8 +200,8 @@
 
 #lose-frequency{
 
-  left:510px;
-  bottom:26px;
+  left:500px;
+  bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
 
@@ -204,14 +214,16 @@
 }
 
 
+
 /* ============================
    INTERFERENCIA
 ============================ */
 
 #interference{
 
-  left:630px;
-  bottom:24px;
+  left:650px; /* separación añadida */
+
+  bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-interference-off.webp");
 
@@ -224,14 +236,16 @@
 }
 
 
+
 /* ============================
    REINICIAR
 ============================ */
 
 #reset-frequency{
 
-  left:730px;
-  bottom:32px;
+  left:800px; /* separación añadida */
+
+  bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-reset-off.webp");
 
@@ -242,6 +256,7 @@
   background-image:url("/modules/ultima-emision/assets/btn-reset-on.webp");
 
 }
+
 
 
 /* ============================
@@ -266,6 +281,8 @@
   background-repeat:no-repeat;
   background-position:center;
 
+  background-color:transparent;
+
   cursor:pointer;
 
 }
@@ -280,6 +297,7 @@
     drop-shadow(0 0 26px rgba(255,0,0,0.7));
 
 }
+
 
 
 /* ============================
@@ -306,6 +324,7 @@
   cursor:pointer;
 
 }
+
 
 
 /* ============================
