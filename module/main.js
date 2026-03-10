@@ -1,302 +1,256 @@
-const MODULE_ID = "ultima-emision";
+/* ============================
+   VENTANA FOUNDRY
+============================ */
 
-class RadioPanel extends Application {
+.window-app .window-content{
+  overflow:visible !important;
+  height:auto !important;
+  padding:0 !important;
+  background:transparent;
+}
 
-  frequencies = 6;
 
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "radio-panel",
-      title: "La Última Emisión",
-      width: 900,
-      height: 520,
-      resizable: false,
-      popOut: true
-    });
-  }
+/* ============================
+   PANEL CONSOLA
+============================ */
 
+.radio-console{
+  background-image:url("/modules/ultima-emision/assets/radio-console.webp");
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-position:center;
 
-  /* ============================
-     HTML DEL PANEL
-  ============================ */
+  width:900px;
+  height:520px;
 
-  async _renderInner(data) {
+  position:relative;
+  margin:auto;
 
-    const lights = [];
+  font-family:monospace;
+}
 
-    for (let i = 0; i < 6; i++) {
 
-      const img = i < this.frequencies
-        ? "light-on.webp"
-        : "light-off.webp";
+/* ============================
+   LUCES
+============================ */
 
-      lights.push(`
-        <img class="radio-light"
-        data-index="${i}"
-        src="/modules/${MODULE_ID}/assets/${img}">
-      `);
+.radio-lights{
+  position:absolute;
+  top:30px;
+  left:60px;
+  width:540px;
 
-    }
+  display:flex;
+  justify-content:space-between;
+}
 
+.radio-light{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  border-radius:50%;
+}
 
-    const html = `
-    <div class="radio-console">
+.radio-light.on{
+  filter:
+    drop-shadow(0 0 6px red)
+    drop-shadow(0 0 14px red)
+    drop-shadow(0 0 26px rgba(255,0,0,0.7));
+}
 
-      <div class="radio-lights">
-        ${lights.join("")}
-      </div>
+.radio-light.flash{
+  animation:flash 0.4s ease-in-out 3;
+}
 
-      <div class="radio-screen">
-        <div id="radio-log">
-        > Señal estable
-        </div>
-      </div>
+@keyframes flash{
+  0%{opacity:1}
+  50%{opacity:0.3}
+  100%{opacity:1}
+}
 
-      <div class="radio-buttons">
 
-        <button id="lose-frequency">
-        Perder<br>Frecuencia
-        </button>
+/* ============================
+   CRT
+============================ */
 
-        <button id="interference">
-        Interferencia
-        </button>
+.radio-screen{
 
-        <button id="reset-frequency">
-        Reiniciar
-        </button>
+  position:absolute;
 
-      </div>
+  top:110px;
+  left:470px;
 
-      <button class="radio-call" id="radio-call">
-      Llamada
-      </button>
+  width:400px;
+  height:285px;
 
-    </div>
-    `;
+  background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
+  background-size:100% 100%;
+  background-repeat:no-repeat;
 
-    return $(html);
-  }
+  padding:22px;
 
+  color:#00ff9c;
+  font-size:15px;
 
-  /* ============================
-     ACTUALIZAR LUCES
-  ============================ */
+  text-shadow:0 0 6px #00ff9c;
 
-  updateLights(html) {
+  overflow:hidden;
 
-    const lights = html.find(".radio-light");
+  border-radius:18px;
 
-    lights.each((i, el) => {
-
-      const img = i < this.frequencies
-        ? "light-on.webp"
-        : "light-off.webp";
-
-      el.src = `/modules/${MODULE_ID}/assets/${img}`;
-
-    });
-
-  }
-
-
-  /* ============================
-     EVENTOS
-  ============================ */
-
-  activateListeners(html) {
-
-    super.activateListeners(html);
-
-
-    /* PERDER FRECUENCIA */
-
-    html.find("#lose-frequency").click(() => {
-
-      if (this.frequencies > 0) {
-
-        this.frequencies--;
-
-        ChatMessage.create({
-          content: "📡 Una frecuencia se ha perdido."
-        });
-
-        this.updateLights(html);
-
-      }
-
-    });
-
-
-    /* INTERFERENCIA */
-
-    html.find("#interference").click(() => {
-
-      ChatMessage.create({
-        content: "📻 La señal se llena de estática."
-      });
-
-      const audio = new Audio(`/modules/${MODULE_ID}/sounds/radio-static.mp3`);
-      audio.play();
-
-      const lights = html.find(".radio-light");
-
-      const random = Math.floor(Math.random() * lights.length);
-
-      lights.eq(random).addClass("flash");
-
-      setTimeout(() => {
-        lights.removeClass("flash");
-      }, 800);
-
-    });
-
-
-    /* REINICIAR */
-
-    html.find("#reset-frequency").click(() => {
-
-      this.frequencies = 6;
-
-      ChatMessage.create({
-        content: "🔧 Todas las frecuencias han sido restauradas."
-      });
-
-      this.updateLights(html);
-
-    });
-
-
-    /* LLAMADA */
-
-    html.find("#radio-call").click(() => {
-
-      new CallGenerator().render(true);
-
-    });
-
-  }
+  box-shadow:
+    inset 0 0 45px rgba(0,0,0,0.9),
+    inset 0 0 20px rgba(0,0,0,0.7),
+    0 0 8px rgba(0,0,0,0.6);
+}
+
+
+/* ============================
+   EFECTO CRT
+============================ */
+
+.radio-screen::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+
+  pointer-events:none;
+  opacity:0.35;
 
 }
 
 
-
 /* ============================
-   GENERADOR DE LLAMADAS
+   CONTENEDOR BOTONES
 ============================ */
 
-class CallGenerator extends Application {
-
-  static get defaultOptions() {
-
-    return foundry.utils.mergeObject(super.defaultOptions, {
-
-      id: "radio-call-generator",
-      title: "Llamada Entrante",
-
-      width: 420,
-      height: 320,
-      resizable: false
-
-    });
-
-  }
+.radio-buttons{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+}
 
 
-  async _renderInner(data) {
+/* ============================
+   BOTONES GENERALES
+============================ */
 
-    const names = [
-      "Carlos",
-      "Marta",
-      "Lucía",
-      "Raúl",
-      "Ana",
-      "Miguel",
-      "Laura"
-    ];
+.radio-buttons button{
 
-    const cities = [
-      "Madrid",
-      "Valencia",
-      "Sevilla",
-      "Bilbao",
-      "Granada"
-    ];
+  position:absolute;
 
-    const comments = [
+  background:transparent;
+  border:none;
+  box-shadow:none;
 
-      "Creo que vi algo extraño en el cielo.",
-      "Escucho vuestro programa cada noche.",
-      "Hay interferencias en mi radio.",
-      "Algo raro pasa en mi barrio.",
-      "Creo que alguien intenta comunicarse."
+  width:120px;
+  height:95px;
 
-    ];
+  cursor:pointer;
 
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    const name = names[Math.floor(Math.random()*names.length)];
-    const city = cities[Math.floor(Math.random()*cities.length)];
-    const comment = comments[Math.floor(Math.random()*comments.length)];
+  color:#111;
 
+  font-weight:900;
 
-    const html = `
-    <div style="padding:20px;font-family:monospace">
+  text-align:center;
 
-      <h2>📞 Llamada entrante</h2>
-
-      <p><b>Nombre:</b> ${name}</p>
-      <p><b>Ciudad:</b> ${city}</p>
-
-      <hr>
-
-      <p>"${comment}"</p>
-
-      <br>
-
-      <button id="send-call">
-      Enviar al chat
-      </button>
-
-    </div>
-    `;
-
-    return $(html);
-
-  }
-
-
-  activateListeners(html){
-
-    super.activateListeners(html);
-
-    html.find("#send-call").click(()=>{
-
-      const text = html.find("p").last().text();
-
-      ChatMessage.create({
-        content:`📞 Llamada de oyente:<br>${text}`
-      });
-
-      this.close();
-
-    });
-
-  }
+  text-shadow:
+    0 1px 2px rgba(255,255,255,0.35);
 
 }
 
 
-
 /* ============================
-   CARGA DEL MÓDULO
+   BOTONES PRINCIPALES
 ============================ */
 
-Hooks.once("ready", () => {
+/* PERDER FRECUENCIA */
 
-  if (game.user.isGM) {
+.radio-buttons button:nth-child(1){
 
-    new RadioPanel().render(true);
+  left:508px;
+  bottom:32px;
 
-  }
+  font-size:15px;
 
-});
+}
+
+
+/* INTERFERENCIA */
+
+.radio-buttons button:nth-child(2){
+
+  left:624px;
+  bottom:32px;
+
+  font-size:13px;
+
+}
+
+
+/* REINICIAR */
+
+.radio-buttons button:nth-child(3){
+
+  left:732px;
+  bottom:34px;
+
+  font-size:18px;
+
+}
+
+
+/* ============================
+   NUEVO BOTÓN LLAMADA
+============================ */
+
+.radio-call{
+
+  position:absolute;
+
+  left:250px;
+  top:250px;
+
+  width:160px;
+  height:80px;
+
+  background:transparent;
+  border:none;
+
+  font-size:20px;
+  font-weight:bold;
+
+  color:#111;
+
+  cursor:pointer;
+
+  text-align:center;
+
+  text-shadow:
+    0 1px 2px rgba(255,255,255,0.3);
+
+}
+
+.radio-call:hover{
+
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 10px rgba(255,255,255,0.3);
+
+}
