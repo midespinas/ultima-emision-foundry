@@ -1,7 +1,7 @@
 const MODULE_ID = "ultima-emision";
 
 /* ============================
-   REGISTRO DE CONEXIONES
+   DATOS DEL SISTEMA
 ============================ */
 
 let conexiones = [];
@@ -38,7 +38,7 @@ class ConnectionWindow extends Application{
     return foundry.utils.mergeObject(super.defaultOptions,{
       id:"radio-connection-window",
       title:"Registrar Conexión",
-      width:400,
+      width:420,
       height:180,
       resizable:false
     });
@@ -47,20 +47,20 @@ class ConnectionWindow extends Application{
   async _renderInner(){
 
     const html = `
-    <div style="padding:15px;font-family:monospace">
+
+    <div class="radio-window">
 
       <h2>Registrar Conexión</h2>
 
       <input id="connection-input"
-      style="width:100%;margin-top:10px"
       placeholder="Ej: Hospital San Mateo">
 
-      <button id="save-connection"
-      style="margin-top:15px;width:100%">
+      <button id="save-connection">
       Guardar
       </button>
 
     </div>
+
     `;
 
     return $(html);
@@ -99,14 +99,18 @@ class RadioPanel extends Application {
   frequencies = 6;
 
   static get defaultOptions() {
+
     return foundry.utils.mergeObject(super.defaultOptions, {
+
       id: "radio-panel",
       title: "La Última Emisión",
       width: 900,
       height: 520,
       resizable: false,
       popOut: true
+
     });
+
   }
 
 
@@ -114,7 +118,7 @@ class RadioPanel extends Application {
      HTML DEL PANEL
   ============================ */
 
-  async _renderInner(data) {
+  async _renderInner() {
 
     const lights = [];
 
@@ -134,6 +138,7 @@ class RadioPanel extends Application {
 
 
     const html = `
+
     <div class="radio-console">
 
       <div class="radio-lights">
@@ -169,9 +174,11 @@ class RadioPanel extends Application {
       </button>
 
     </div>
+
     `;
 
     return $(html);
+
   }
 
 
@@ -265,7 +272,7 @@ class RadioPanel extends Application {
     });
 
 
-    /* LLAMADA */
+    /* BOTÓN LLAMADA */
 
     html.find("#radio-call").click(() => {
 
@@ -278,7 +285,7 @@ class RadioPanel extends Application {
     });
 
 
-    /* REGISTRAR CONEXIÓN */
+    /* BOTÓN REGISTRAR CONEXIÓN */
 
     html.find("#radio-connection").click(()=>{
 
@@ -304,7 +311,6 @@ class CallGenerator extends Application {
 
       id: "radio-call-generator",
       title: "Llamada Entrante",
-
       width: 420,
       height: 320,
       resizable: false
@@ -314,7 +320,7 @@ class CallGenerator extends Application {
   }
 
 
-  async _renderInner(data) {
+  async _renderInner() {
 
     const names = [
       "Carlos",
@@ -351,7 +357,8 @@ class CallGenerator extends Application {
 
 
     const html = `
-    <div style="padding:20px;font-family:monospace">
+
+    <div class="radio-window">
 
       <h2>📞 Llamada entrante</h2>
 
@@ -362,13 +369,12 @@ class CallGenerator extends Application {
 
       <p>"${comment}"</p>
 
-      <br>
-
       <button id="send-call">
       Enviar al chat
       </button>
 
     </div>
+
     `;
 
     return $(html);
@@ -401,7 +407,7 @@ class CallGenerator extends Application {
 
 
 /* ============================
-   CARGA DEL MÓDULO
+   INICIAR PANEL
 ============================ */
 
 Hooks.once("ready", () => {
