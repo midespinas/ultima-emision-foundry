@@ -1,159 +1,265 @@
 const MODULE_ID = "ultima-emision";
 
+
+/* ============================
+   PANEL PRINCIPAL DE RADIO
+============================ */
+
 class RadioPanel extends Application {
 
-static get defaultOptions() {
-return foundry.utils.mergeObject(super.defaultOptions,{
-id:"radio-panel",
-title:"📻 La Última Emisión",
-width:920,
-height:560,
-resizable:false
-});
-}
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
 
-getData(){
+      id: "radio-panel",
 
-const frecuencias = game.settings.get(MODULE_ID,"frecuencias");
+      title: "La Última Emisión",
 
-let luces=[];
+      width: 900,
+      height: 520,
 
-for(let i=0;i<6;i++){
-luces.push(i < frecuencias);
-}
+      resizable: false,
+      popOut: true,
 
-return {luces};
+      template: null
 
-}
+    });
+  }
 
-_renderInner(){
 
-const data=this.getData();
+  /* ============================
+     HTML DEL PANEL
+  ============================ */
 
-let lucesHTML="";
+  async _renderInner(data) {
 
-data.luces.forEach(l=>{
+    const html = `
+    <div class="radio-console">
 
-lucesHTML+=`
-<img class="radio-light ${l ? "on":"off"}"
-src="/modules/${MODULE_ID}/assets/light-${l ? "on":"off"}.webp">
-`;
+      <div class="radio-lights">
 
-});
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
+        <img class="radio-light on" src="/modules/${MODULE_ID}/assets/light-on.webp">
 
-return $(`
+      </div>
 
-<div class="radio-console">
+      <div class="radio-screen">
 
-<div class="radio-lights">
-${lucesHTML}
-</div>
+        <div id="radio-log">
+        > Señal estable
+        </div>
 
-<div class="radio-screen" id="radio-screen">
-<div>> Señal estable</div>
-</div>
+      </div>
 
-<div class="radio-buttons">
 
-<button id="perder">Perder Frecuencia</button>
+      <div class="radio-buttons">
 
-<button id="interferencia">Interferencia</button>
+        <button id="lose-frequency">
+        Perder<br>Frecuencia
+        </button>
 
-<button id="reset">Reiniciar</button>
+        <button id="interference">
+        Interferencia
+        </button>
 
-</div>
+        <button id="reset-frequency">
+        Reiniciar
+        </button>
 
-</div>
+      </div>
 
-`);
 
-}
+      <button class="radio-call" id="radio-call">
+      Llamada
+      </button>
 
-activateListeners(html){
 
-super.activateListeners(html);
+    </div>
+    `;
 
-html.find("#perder").click(async()=>{
+    return $(html);
+  }
 
-let f=game.settings.get(MODULE_ID,"frecuencias");
 
-if(f>0){
+  /* ============================
+     EVENTOS
+  ============================ */
 
-f--;
+  activateListeners(html) {
 
-await game.settings.set(MODULE_ID,"frecuencias",f);
+    super.activateListeners(html);
 
-emitirMensaje("Una frecuencia se ha perdido");
 
-this.render();
+    html.find("#lose-frequency").click(() => {
 
-}
+      ChatMessage.create({
+        content: "📡 Una frecuencia se ha perdido."
+      });
 
-});
+    });
 
-html.find("#interferencia").click(()=>{
 
-emitirMensaje("La señal se llena de estática");
+    html.find("#interference").click(() => {
 
-flashLuces();
+      ChatMessage.create({
+        content: "📻 La señal se llena de estática."
+      });
 
-});
+      const audio = new Audio(`/modules/${MODULE_ID}/sounds/radio-static.mp3`);
+      audio.play();
 
-html.find("#reset").click(async()=>{
+    });
 
-await game.settings.set(MODULE_ID,"frecuencias",6);
 
-emitirMensaje("La señal vuelve a estabilizarse");
+    html.find("#reset-frequency").click(() => {
 
-this.render();
+      ChatMessage.create({
+        content: "🔧 Todas las frecuencias han sido restauradas."
+      });
 
-});
+    });
 
-}
 
-}
+    /* ============================
+       BOTÓN LLAMADA
+    ============================ */
 
-Hooks.once("init",()=>{
+    html.find("#radio-call").click(() => {
 
-game.settings.register(MODULE_ID,"frecuencias",{
-scope:"world",
-config:false,
-type:Number,
-default:6
-});
+      new CallGenerator().render(true);
 
-});
+    });
 
-Hooks.once("ready",()=>{
-
-new RadioPanel().render(true);
-
-});
-
-function emitirMensaje(texto){
-
-ChatMessage.create({
-content:`<b>📻 ${texto}</b>`
-});
-
-const pantalla=document.querySelector("#radio-screen");
-
-if(pantalla){
-pantalla.innerHTML+=`<div>> ${texto}</div>`;
-}
+  }
 
 }
 
-function flashLuces(){
 
-document.querySelectorAll(".radio-light").forEach(l=>{
 
-l.classList.add("flash");
+/* ============================
+   GENERADOR DE OYENTES
+============================ */
 
-setTimeout(()=>{
-l.classList.remove("flash");
-},1000);
+class CallGenerator extends Application {
 
-});
+  static get defaultOptions() {
+
+    return foundry.utils.mergeObject(super.defaultOptions, {
+
+      id: "radio-call-generator",
+
+      title: "Llamada Entrante",
+
+      width: 420,
+      height: 320,
+
+      resizable: false
+
+    });
+
+  }
+
+
+  async _renderInner(data) {
+
+    const names = [
+      "Carlos",
+      "Marta",
+      "Lucía",
+      "Javier",
+      "Raúl",
+      "Ana",
+      "Miguel",
+      "Laura"
+    ];
+
+    const cities = [
+      "Madrid",
+      "Valencia",
+      "Sevilla",
+      "Bilbao",
+      "Zaragoza",
+      "Granada",
+      "Salamanca"
+    ];
+
+    const comments = [
+
+      "Creo que vi algo extraño en el cielo.",
+      "Llevo escuchando vuestro programa desde hace años.",
+      "Mi vecino capta señales raras por la radio.",
+      "Hay interferencias en mi barrio todas las noches.",
+      "Creo que alguien intenta comunicarse."
+
+    ];
+
+
+    const name = names[Math.floor(Math.random()*names.length)];
+    const city = cities[Math.floor(Math.random()*cities.length)];
+    const comment = comments[Math.floor(Math.random()*comments.length)];
+
+
+    const html = `
+    <div style="padding:20px;font-family:monospace">
+
+      <h2>📞 Llamada entrante</h2>
+
+      <p><b>Nombre:</b> ${name}</p>
+      <p><b>Ciudad:</b> ${city}</p>
+
+      <hr>
+
+      <p>"${comment}"</p>
+
+      <br>
+
+      <button id="send-call">
+      Enviar al chat
+      </button>
+
+    </div>
+    `;
+
+    return $(html);
+
+  }
+
+
+  activateListeners(html){
+
+    super.activateListeners(html);
+
+    html.find("#send-call").click(()=>{
+
+      const text = html.find("p").last().text();
+
+      ChatMessage.create({
+        content:`📞 Llamada de oyente:<br>${text}`
+      });
+
+      this.close();
+
+    });
+
+  }
 
 }
+
+
+
+/* ============================
+   CARGA DEL MÓDULO
+============================ */
+
+Hooks.once("ready", () => {
+
+  if (game.user.isGM) {
+
+    new RadioPanel().render(true);
+
+  }
+
+});
