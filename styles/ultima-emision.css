@@ -93,14 +93,14 @@
   left:115px;
   top:120px;
 
-  width:320px;   /* más largo */
-  height:18px;   /* más ancho */
+  width:320px;
+  height:18px;
 
   border-radius:3px;
 
   overflow:hidden;
 
-  /* ZONAS DE COLOR DEL MEDIDOR */
+  /* COLORES DEL MEDIDOR */
 
   background:
   linear-gradient(
@@ -120,30 +120,29 @@
 
 
 /* ============================
-   LED DE SEÑAL
+   BARRA DE COBERTURA NEGRA
 ============================ */
 
 .radio-signal-bar{
 
+  position:absolute;
+
+  right:0;
+  top:0;
+
   height:100%;
-  width:100%;
+  width:0%;
 
-  background:#00ff5a;
+  background:#000;
 
-  transition:
-    width 0.4s ease,
-    background 0.3s ease;
-
-  box-shadow:
-    0 0 10px rgba(0,255,120,0.9),
-    inset 0 0 4px rgba(0,0,0,0.7);
+  transition:width 0.4s ease;
 
 }
 
 
 
 /* ============================
-   DIVISIONES DEL MEDIDOR
+   SEGMENTOS DEL MEDIDOR
 ============================ */
 
 .radio-signal::after{
