@@ -206,8 +206,8 @@
 
 .radio-buttons button:nth-child(1){
 
-  left:520px;   /* desplazado a la derecha */
-  bottom:26px;  /* bajado ligeramente */
+  left:510px;   /* ligeramente a la izquierda */
+  bottom:26px;
 
   font-size:14px;
   line-height:16px;
@@ -222,8 +222,8 @@
 
 .radio-buttons button:nth-child(2){
 
-  left:640px;   /* desplazado a la derecha */
-  bottom:24px;  /* bajado un poco más */
+  left:630px;   /* ligeramente a la izquierda */
+  bottom:24px;
 
   font-size:12px;
 
@@ -254,8 +254,8 @@
 
   position:absolute;
 
-  left:360px;   /* movido hacia el CRT */
-  top:210px;
+  left:340px;   /* desplazado un poco a la izquierda */
+  top:195px;    /* subido un poco */
 
   width:110px;
   height:110px;
