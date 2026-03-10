@@ -1,44 +1,52 @@
 const MODULE_ID = "ultima-emision";
 
+
 class RadioPanel extends Application {
 
-  frequencies = 6;
+  frequencies = 6
+  signalLevel = 6
+
+  connections = []
+
 
   static get defaultOptions() {
+
     return foundry.utils.mergeObject(super.defaultOptions, {
+
       id: "radio-panel",
       title: "La Última Emisión",
+
       width: 900,
       height: 520,
+
       resizable: false,
       popOut: true
-    });
+
+    })
+
   }
 
 
-  /* ============================
-     HTML DEL PANEL
-  ============================ */
+  async _renderInner() {
 
-  async _renderInner(data) {
-
-    const lights = [];
+    const lights = []
 
     for (let i = 0; i < 6; i++) {
 
       const img = i < this.frequencies
         ? "light-on.webp"
-        : "light-off.webp";
+        : "light-off.webp"
 
       lights.push(`
         <img class="radio-light"
         data-index="${i}"
         src="/modules/${MODULE_ID}/assets/${img}">
-      `);
+      `)
 
     }
 
-    const html = `
+
+    return $(`
     <div class="radio-console">
 
       <div class="radio-lights">
@@ -50,10 +58,13 @@ class RadioPanel extends Application {
       </div>
 
       <div class="radio-screen">
+
         <div id="radio-log">
-        > Señal estable
+        > Sistema listo
         </div>
+
       </div>
+
 
       <div class="radio-buttons">
 
@@ -65,135 +76,158 @@ class RadioPanel extends Application {
 
       </div>
 
+
       <button class="radio-call" id="radio-call"></button>
 
-    </div>
-    `;
+      <button class="radio-connection" id="radio-connection"></button>
 
-    return $(html);
+    </div>
+    `)
+
   }
 
 
-  /* ============================
-     ACTUALIZAR LUCES
-  ============================ */
 
-  updateLights(html) {
+  updateLights(html){
 
-    const lights = html.find(".radio-light");
+    const lights = html.find(".radio-light")
 
-    lights.each((i, el) => {
+    lights.each((i, el)=>{
 
       const img = i < this.frequencies
         ? "light-on.webp"
-        : "light-off.webp";
+        : "light-off.webp"
 
-      el.src = `/modules/${MODULE_ID}/assets/${img}`;
+      el.src = `/modules/${MODULE_ID}/assets/${img}`
 
-    });
-
-    this.updateSignal(html);
+    })
 
   }
 
 
-  /* ============================
-     ACTUALIZAR MEDIDOR SIGNAL
-  ============================ */
 
   updateSignal(html){
 
-    const indicator = html.find(".radio-signal-bar");
+    const bar = html.find(".radio-signal-bar")
 
-    const percent = (this.frequencies / 6) * 100;
+    const step = 330 / 6
 
-    const meterWidth = html.find(".radio-signal").width();
+    const pos = (6 - this.signalLevel) * step
 
-    const pos = meterWidth * (percent / 100);
-
-    indicator.css("left", pos + "px");
+    bar.css("left", pos+"px")
 
   }
 
 
-  /* ============================
-     EVENTOS
-  ============================ */
 
-  activateListeners(html) {
+  addLog(html, text){
 
-    super.activateListeners(html);
+    const log = html.find("#radio-log")
+
+    const line = $(`<div class="radio-entry">> ${text}</div>`)
+
+    log.append(line)
+
+    log.scrollTop(log[0].scrollHeight)
+
+  }
+
+
+
+  activateListeners(html){
+
+    super.activateListeners(html)
+
 
 
     /* PERDER FRECUENCIA */
 
-    html.find("#lose-frequency").click(() => {
+    html.find("#lose-frequency").click(()=>{
 
-      if (this.frequencies > 0) {
+      if(this.frequencies>0){
 
-        this.frequencies--;
+        this.frequencies--
+
+        this.signalLevel--
 
         ChatMessage.create({
-          content: "📡 Una frecuencia se ha perdido."
-        });
+          content:"📡 Una frecuencia se ha perdido."
+        })
 
-        this.updateLights(html);
+        this.updateLights(html)
+
+        this.updateSignal(html)
 
       }
 
-    });
+    })
+
 
 
     /* INTERFERENCIA */
 
-    html.find("#interference").click(() => {
+    html.find("#interference").click(()=>{
 
       ChatMessage.create({
-        content: "📻 La señal se llena de estática."
-      });
+        content:"📻 La señal se llena de estática."
+      })
 
-      const audio = new Audio(`/modules/${MODULE_ID}/sounds/radio-static.mp3`);
-      audio.play();
+      const audio = new Audio(`/modules/${MODULE_ID}/sounds/radio-static.mp3`)
+      audio.play()
 
-      const lights = html.find(".radio-light");
+      const lights = html.find(".radio-light")
 
-      const random = Math.floor(Math.random() * lights.length);
+      const random = Math.floor(Math.random()*lights.length)
 
-      lights.eq(random).addClass("flash");
+      lights.eq(random).addClass("flash")
 
-      setTimeout(() => {
-        lights.removeClass("flash");
-      }, 800);
+      setTimeout(()=>{
+        lights.removeClass("flash")
+      },800)
 
-    });
+    })
+
 
 
     /* REINICIAR */
 
-    html.find("#reset-frequency").click(() => {
+    html.find("#reset-frequency").click(()=>{
 
-      this.frequencies = 6;
+      this.frequencies = 6
+      this.signalLevel = 6
 
       ChatMessage.create({
-        content: "🔧 Todas las frecuencias han sido restauradas."
-      });
+        content:"🔧 Todas las frecuencias han sido restauradas."
+      })
 
-      this.updateLights(html);
+      this.updateLights(html)
+      this.updateSignal(html)
 
-    });
+    })
 
 
-    /* LLAMADA */
 
-    html.find("#radio-call").click((ev) => {
+    /* GENERAR LLAMADA */
 
-      const btn = $(ev.currentTarget);
+    html.find("#radio-call").click(()=>{
 
-      btn.toggleClass("active");
+      new CallGenerator(this).render(true)
 
-      new CallGenerator().render(true);
+    })
 
-    });
+
+
+    /* BOTON CONEXION */
+
+    html.find("#radio-connection").click(()=>{
+
+      new ConnectionRegister(this).render(true)
+
+    })
+
+
+
+    this.updateSignal(html)
 
   }
 
@@ -205,27 +239,39 @@ class RadioPanel extends Application {
    GENERADOR DE LLAMADAS
 ============================ */
 
+
 class CallGenerator extends Application {
 
-  static get defaultOptions() {
+  constructor(panel){
 
-    return foundry.utils.mergeObject(super.defaultOptions, {
+    super()
 
-      id: "radio-call-generator",
-      title: "Llamada Entrante",
-
-      width: 420,
-      height: 320,
-      resizable: false
-
-    });
+    this.panel = panel
 
   }
 
 
-  async _renderInner(data) {
+  static get defaultOptions(){
+
+    return foundry.utils.mergeObject(super.defaultOptions,{
+
+      id:"radio-call-generator",
+      title:"Llamada Entrante",
+
+      width:420,
+      height:320,
+      resizable:false
+
+    })
+
+  }
+
+
+
+  async _renderInner(){
 
     const names = [
+
       "Carlos",
       "Marta",
       "Lucía",
@@ -233,15 +279,18 @@ class CallGenerator extends Application {
       "Ana",
       "Miguel",
       "Laura"
-    ];
+
+    ]
 
     const cities = [
+
       "Madrid",
       "Valencia",
       "Sevilla",
       "Bilbao",
       "Granada"
-    ];
+
+    ]
 
     const comments = [
 
@@ -251,16 +300,20 @@ class CallGenerator extends Application {
       "Algo raro pasa en mi barrio.",
       "Creo que alguien intenta comunicarse."
 
-    ];
+    ]
 
 
-    const name = names[Math.floor(Math.random()*names.length)];
-    const city = cities[Math.floor(Math.random()*cities.length)];
-    const comment = comments[Math.floor(Math.random()*comments.length)];
+    const name = names[Math.floor(Math.random()*names.length)]
+    const city = cities[Math.floor(Math.random()*cities.length)]
+    const comment = comments[Math.floor(Math.random()*comments.length)]
 
 
-    const html = `
-    <div class="radio-window">
+    this.name = name
+    this.city = city
+
+
+    return $(`
+    <div class="connection-window">
 
       <h2>📞 Llamada entrante</h2>
 
@@ -271,33 +324,26 @@ class CallGenerator extends Application {
 
       <p>"${comment}"</p>
 
-      <button id="send-call">
-      Enviar al chat
-      </button>
+      <button id="send-call">Aceptar llamada</button>
 
     </div>
-    `;
-
-    return $(html);
+    `)
 
   }
 
 
+
   activateListeners(html){
 
-    super.activateListeners(html);
+    super.activateListeners(html)
 
     html.find("#send-call").click(()=>{
 
-      const text = html.find("p").last().text();
+      new ConnectionRegister(this.panel, this.name, this.city).render(true)
 
-      ChatMessage.create({
-        content:`📞 Llamada de oyente:<br>${text}`
-      });
+      this.close()
 
-      this.close();
-
-    });
+    })
 
   }
 
@@ -306,15 +352,119 @@ class CallGenerator extends Application {
 
 
 /* ============================
-   CARGA DEL MÓDULO
+   REGISTRO DE CONEXION
 ============================ */
 
-Hooks.once("ready", () => {
 
-  if (game.user.isGM) {
+class ConnectionRegister extends Application{
 
-    new RadioPanel().render(true);
+  constructor(panel, name="", city=""){
+
+    super()
+
+    this.panel = panel
+    this.name = name
+    this.city = city
 
   }
 
-});
+
+  static get defaultOptions(){
+
+    return foundry.utils.mergeObject(super.defaultOptions,{
+
+      id:"radio-connection-register",
+      title:"Registrar Conexión",
+
+      width:420,
+      height:340,
+      resizable:false
+
+    })
+
+  }
+
+
+
+  async _renderInner(){
+
+    return $(`
+
+    <div class="connection-window">
+
+      <h2>Registrar conexión</h2>
+
+      <label>Nombre</label>
+      <input type="text" id="conn-name" value="${this.name}">
+
+      <label>Ciudad</label>
+      <input type="text" id="conn-city" value="${this.city}">
+
+      <label>Conexión detectada</label>
+      <textarea id="conn-note"></textarea>
+
+      <button id="save-connection">
+      Guardar registro
+      </button>
+
+    </div>
+
+    `)
+
+  }
+
+
+
+  activateListeners(html){
+
+    super.activateListeners(html)
+
+    html.find("#save-connection").click(()=>{
+
+      const name = html.find("#conn-name").val()
+      const city = html.find("#conn-city").val()
+      const note = html.find("#conn-note").val()
+
+      const panel = this.panel
+
+      const entry = `${name} (${city}) → ${note}`
+
+      const app = Object.values(ui.windows)
+        .find(w => w instanceof RadioPanel)
+
+      if(app){
+
+        const htmlPanel = app.element
+
+        const log = htmlPanel.find("#radio-log")
+
+        log.append(`<div class="radio-entry">> ${entry}</div>`)
+
+        log.scrollTop(log[0].scrollHeight)
+
+      }
+
+      this.close()
+
+    })
+
+  }
+
+}
+
+
+
+/* ============================
+   CARGA DEL MODULO
+============================ */
+
+
+Hooks.once("ready", ()=>{
+
+  if(game.user.isGM){
+
+    new RadioPanel().render(true)
+
+  }
+
+})
