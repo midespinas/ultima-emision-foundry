@@ -17,7 +17,6 @@
 .radio-console{
 
   background-image:url("/modules/ultima-emision/assets/radio-console.webp");
-
   background-size:100% 100%;
   background-repeat:no-repeat;
   background-position:center;
@@ -53,7 +52,6 @@
 
   width:72px;
   height:72px;
-
   object-fit:contain;
   border-radius:50%;
 
@@ -120,10 +118,10 @@
 
 }
 
+
 .radio-signal-bar{
 
   position:absolute;
-
   left:0;
   top:0;
 
@@ -139,7 +137,6 @@
 .radio-signal::after{
 
   content:"";
-
   position:absolute;
   inset:0;
 
@@ -153,7 +150,6 @@
     );
 
   pointer-events:none;
-
   opacity:0.5;
 
 }
@@ -174,7 +170,6 @@
   height:260px;
 
   background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
-
   background-size:100% 100%;
   background-repeat:no-repeat;
 
@@ -193,7 +188,21 @@
 
 
 /* ============================
-   BOTONES
+   CONTENEDOR BOTONES
+============================ */
+
+.radio-buttons{
+
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+
+}
+
+
+/* ============================
+   BOTONES BASE
 ============================ */
 
 .radio-buttons button{
@@ -211,6 +220,66 @@
   background-color:transparent;
 
   cursor:pointer;
+
+}
+
+
+/* ============================
+   PERDER FRECUENCIA
+============================ */
+
+#lose-frequency{
+
+  left:430px;
+  bottom:28px;
+
+  background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
+
+}
+
+#lose-frequency:active{
+
+  background-image:url("/modules/ultima-emision/assets/btn-frequency-on.webp");
+
+}
+
+
+/* ============================
+   INTERFERENCIA
+============================ */
+
+#interference{
+
+  left:580px;
+  bottom:28px;
+
+  background-image:url("/modules/ultima-emision/assets/btn-interference-off.webp");
+
+}
+
+#interference:active{
+
+  background-image:url("/modules/ultima-emision/assets/btn-interference-on.webp");
+
+}
+
+
+/* ============================
+   REINICIAR
+============================ */
+
+#reset-frequency{
+
+  left:730px;
+  bottom:28px;
+
+  background-image:url("/modules/ultima-emision/assets/btn-reset-off.webp");
+
+}
+
+#reset-frequency:active{
+
+  background-image:url("/modules/ultima-emision/assets/btn-reset-on.webp");
 
 }
 
@@ -279,23 +348,5 @@
   filter:
     drop-shadow(0 0 6px red)
     drop-shadow(0 0 12px red);
-
-}
-
-
-/* ============================
-   VENTANAS
-============================ */
-
-.radio-window{
-
-  padding:20px;
-  font-family:monospace;
-
-  color:#00ff9c;
-
-  background:#020202;
-
-  border:2px solid #550000;
 
 }
