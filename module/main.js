@@ -162,9 +162,7 @@ class RadioPanel extends Application {
 
       </div>
 
-      <button class="radio-call" id="radio-call">
-      Llamada
-      </button>
+      <button class="radio-call" id="radio-call"></button>
 
       <button class="radio-connection" id="radio-connection">
       Conexión
@@ -205,7 +203,6 @@ class RadioPanel extends Application {
   activateListeners(html) {
 
     super.activateListeners(html);
-
 
     actualizarCRT(html);
 
@@ -271,6 +268,10 @@ class RadioPanel extends Application {
     /* LLAMADA */
 
     html.find("#radio-call").click(() => {
+
+      const button = html.find("#radio-call");
+
+      button.addClass("active");
 
       new CallGenerator().render(true);
 
@@ -388,6 +389,8 @@ class CallGenerator extends Application {
       });
 
       this.close();
+
+      $("#radio-call").removeClass("active");
 
     });
 
