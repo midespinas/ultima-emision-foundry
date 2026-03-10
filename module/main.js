@@ -1,6 +1,98 @@
-Main
-
 const MODULE_ID = "ultima-emision";
+
+/* ============================
+   REGISTRO DE CONEXIONES
+============================ */
+
+let conexiones = [];
+
+
+/* ============================
+   ACTUALIZAR CRT
+============================ */
+
+function actualizarCRT(html){
+
+  const crt = html.find("#radio-log");
+
+  if(!crt.length) return;
+
+  let texto = "> Señal estable\n\n";
+
+  conexiones.forEach(c=>{
+    texto += `> Conexión detectada: ${c}\n`;
+  });
+
+  crt.text(texto);
+
+}
+
+
+/* ============================
+   VENTANA REGISTRAR CONEXIÓN
+============================ */
+
+class ConnectionWindow extends Application{
+
+  static get defaultOptions(){
+    return foundry.utils.mergeObject(super.defaultOptions,{
+      id:"radio-connection-window",
+      title:"Registrar Conexión",
+      width:400,
+      height:180,
+      resizable:false
+    });
+  }
+
+  async _renderInner(){
+
+    const html = `
+    <div style="padding:15px;font-family:monospace">
+
+      <h2>Registrar Conexión</h2>
+
+      <input id="connection-input"
+      style="width:100%;margin-top:10px"
+      placeholder="Ej: Hospital San Mateo">
+
+      <button id="save-connection"
+      style="margin-top:15px;width:100%">
+      Guardar
+      </button>
+
+    </div>
+    `;
+
+    return $(html);
+
+  }
+
+  activateListeners(html){
+
+    super.activateListeners(html);
+
+    html.find("#save-connection").click(()=>{
+
+      const value = html.find("#connection-input").val();
+
+      if(!value || value.trim()==="") return;
+
+      conexiones.push(value.trim());
+
+      ui.windows["radio-panel"]?.render(true);
+
+      this.close();
+
+    });
+
+  }
+
+}
+
+
+/* ============================
+   PANEL PRINCIPAL
+============================ */
 
 class RadioPanel extends Application {
 
@@ -74,6 +166,10 @@ class RadioPanel extends Application {
       Llamada
       </button>
 
+      <button class="radio-connection" id="radio-connection">
+      Conexión
+      </button>
+
     </div>
     `;
 
@@ -109,6 +205,9 @@ class RadioPanel extends Application {
   activateListeners(html) {
 
     super.activateListeners(html);
+
+
+    actualizarCRT(html);
 
 
     /* PERDER FRECUENCIA */
@@ -174,6 +273,15 @@ class RadioPanel extends Application {
     html.find("#radio-call").click(() => {
 
       new CallGenerator().render(true);
+
+    });
+
+
+    /* REGISTRAR CONEXIÓN */
+
+    html.find("#radio-connection").click(()=>{
+
+      new ConnectionWindow().render(true);
 
     });
 
