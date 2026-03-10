@@ -97,15 +97,13 @@
 
   border-radius:3px;
 
-  overflow:hidden;
-
-  /* NUEVO BORDE PARA SUAVIZAR EL CONTRASTE */
-
   border:1px solid rgba(0,0,0,0.9);
 
   box-shadow:
     inset 0 0 4px rgba(0,0,0,0.6),
     0 0 2px rgba(0,0,0,0.4);
+
+  overflow:hidden;
 
   background:
   linear-gradient(
@@ -123,9 +121,8 @@
 }
 
 
-
 /* ============================
-   INDICADOR DE FRECUENCIA
+   INDICADOR FRECUENCIA
 ============================ */
 
 .radio-signal-bar{
@@ -140,14 +137,9 @@
 
   background:#000;
 
-  box-shadow:
-    0 0 4px rgba(0,0,0,0.9),
-    0 0 8px rgba(0,0,0,0.6);
-
   transition:left 0.4s ease;
 
 }
-
 
 
 /* ============================
@@ -199,7 +191,7 @@
   padding:20px;
 
   color:#00ff9c;
-  font-size:15px;
+  font-size:14px;
 
   text-shadow:0 0 6px #00ff9c;
 
@@ -211,6 +203,35 @@
     inset 0 0 45px rgba(0,0,0,0.9),
     inset 0 0 20px rgba(0,0,0,0.7),
     0 0 8px rgba(0,0,0,0.6);
+
+}
+
+
+/* ============================
+   LOG CRT
+============================ */
+
+#radio-log{
+
+  height:100%;
+  overflow-y:auto;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:4px;
+
+}
+
+.radio-entry{
+
+  opacity:0.9;
+
+  border-left:2px solid #00ff9c;
+
+  padding-left:6px;
+
+  font-size:13px;
 
 }
 
@@ -242,20 +263,6 @@
 
 
 /* ============================
-   CONTENEDOR BOTONES
-============================ */
-
-.radio-buttons{
-
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-
-}
-
-
-/* ============================
    BOTONES BASE
 ============================ */
 
@@ -275,8 +282,6 @@
 
   background-color:transparent;
 
-  box-shadow:none;
-
   cursor:pointer;
 
   color:transparent;
@@ -285,117 +290,87 @@
 
 
 /* ============================
-   PERDER FRECUENCIA
+   BOTÓN CONEXIÓN
 ============================ */
 
-#lose-frequency{
-
-  left:430px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
-
-}
-
-#lose-frequency:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-frequency-on.webp");
-
-}
-
-
-/* ============================
-   INTERFERENCIA
-============================ */
-
-#interference{
-
-  left:580px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-interference-off.webp");
-
-}
-
-#interference:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-interference-on.webp");
-
-}
-
-
-/* ============================
-   REINICIAR
-============================ */
-
-#reset-frequency{
-
-  left:730px;
-  bottom:28px;
-
-  background-image:url("/modules/ultima-emision/assets/btn-reset-off.webp");
-
-}
-
-#reset-frequency:active{
-
-  background-image:url("/modules/ultima-emision/assets/btn-reset-on.webp");
-
-}
-
-
-/* ============================
-   BOTÓN LLAMADA
-============================ */
-
-.radio-call{
+.radio-connection{
 
   position:absolute;
 
-  left:340px;
-  top:195px;
+  left:310px;
+  top:205px;
 
   width:110px;
-  height:110px;
+  height:95px;
 
-  border:none;
-
-  background-image:url("/modules/ultima-emision/assets/call-button-off.webp");
+  background-image:url("/modules/ultima-emision/assets/connection-button.webp");
 
   background-size:contain;
   background-repeat:no-repeat;
   background-position:center;
 
-  background-color:transparent;
-
+  border:none;
   cursor:pointer;
 
 }
 
-.radio-call.active{
 
-  background-image:url("/modules/ultima-emision/assets/call-button-on.webp");
+.radio-connection::after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:10px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:14px;
+  height:14px;
+
+  background:#200000;
+
+  border-radius:50%;
+
+}
+
+
+.radio-connection.active{
 
   filter:
-    drop-shadow(0 0 6px red)
-    drop-shadow(0 0 16px red)
-    drop-shadow(0 0 26px rgba(255,0,0,0.7));
+    brightness(1.2)
+    drop-shadow(0 0 8px rgba(255,120,0,0.8))
+    drop-shadow(0 0 18px rgba(255,120,0,0.5));
+
+}
+
+
+.radio-connection.active::after{
+
+  background:#ff1c1c;
+
+  box-shadow:
+    0 0 6px red,
+    0 0 12px red,
+    0 0 20px rgba(255,0,0,0.7);
 
 }
 
 
 /* ============================
-   VENTANAS DEL SISTEMA
+   VENTANA REGISTRO CONEXIÓN
 ============================ */
 
-.radio-window{
+.connection-window{
 
   padding:20px;
+
   font-family:monospace;
 
-  color:#00ff9c;
-
   background:#020202;
+
+  color:#00ff9c;
 
   border:2px solid #550000;
 
@@ -405,37 +380,54 @@
 
 }
 
-.radio-window h2{
+.connection-window h2{
 
   margin:0 0 10px 0;
 
   color:#ff4040;
 
-  font-size:18px;
-
   border-bottom:1px solid #550000;
+
   padding-bottom:5px;
 
 }
 
-.radio-window input{
+.connection-window input{
 
   width:100%;
   padding:6px;
 
   background:#111;
+
+  border:1px solid #550000;
+
+  color:#00ff9c;
+
+  margin-bottom:10px;
+
+}
+
+.connection-window textarea{
+
+  width:100%;
+  height:70px;
+
+  background:#111;
+
   border:1px solid #550000;
 
   color:#00ff9c;
 
 }
 
-.radio-window button{
+.connection-window button{
 
   width:100%;
+
   margin-top:12px;
 
   background:#330000;
+
   border:1px solid #aa0000;
 
   color:#fff;
@@ -444,7 +436,7 @@
 
 }
 
-.radio-window button:hover{
+.connection-window button:hover{
 
   background:#660000;
 
