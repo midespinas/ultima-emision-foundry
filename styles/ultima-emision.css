@@ -59,7 +59,6 @@
 .ultima-emision p{
 
   color:#00ff9c;
-
   text-shadow:0 0 4px #00ff9c;
 
   margin:6px 0;
@@ -77,11 +76,9 @@
   padding:8px;
 
   background:#111;
-
   border:1px solid #550000;
 
   color:#00ff9c;
-
   font-family:monospace;
 
 }
@@ -98,19 +95,15 @@
 .ultima-emision button{
 
   margin-top:10px;
-
   width:100%;
-
   padding:10px;
 
   background:#1a1a1a;
-
   border:1px solid #550000;
 
   color:#ff4040;
 
   font-family:monospace;
-
   font-weight:bold;
 
   cursor:pointer;
@@ -190,9 +183,7 @@
 }
 
 .radio-light.flash{
-
   animation:flash 0.4s ease-in-out 3;
-
 }
 
 @keyframes flash{
@@ -205,14 +196,14 @@
 
 
 /* =================================
-   CRT (REDUCIDO)
+   CRT (SUBIDO LIGERAMENTE)
 ================================= */
 
 .radio-screen{
 
   position:absolute;
 
-  top:120px;
+  top:105px;
   left:480px;
 
   width:370px;
@@ -332,10 +323,12 @@
 
 .radio-buttons button:nth-child(1){
 
-  left:520px;
+  left:512px;
   bottom:28px;
 
   font-size:15px;
+
+  line-height:16px;
 
 }
 
@@ -382,7 +375,6 @@
   border:none;
 
   font-size:20px;
-
   font-weight:bold;
 
   color:#111;
