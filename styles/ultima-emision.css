@@ -84,6 +84,45 @@
 
 
 /* ============================
+   BARRA SIGNAL
+============================ */
+
+.radio-signal{
+
+  position:absolute;
+
+  left:130px;
+  top:118px;
+
+  width:250px;
+  height:22px;
+
+  border-radius:4px;
+
+  overflow:hidden;
+
+}
+
+.radio-signal-bar{
+
+  height:100%;
+  width:100%;
+
+  background:#00ff5a;
+
+  transition:
+    width 0.4s ease,
+    background 0.3s ease;
+
+  box-shadow:
+    0 0 8px rgba(0,255,120,0.7),
+    inset 0 0 4px rgba(0,0,0,0.6);
+
+}
+
+
+
+/* ============================
    CRT
 ============================ */
 
@@ -200,7 +239,7 @@
 
 #lose-frequency{
 
-  left:430px;   /* desplazado a la izquierda */
+  left:430px;
   bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-frequency-off.webp");
@@ -221,8 +260,7 @@
 
 #interference{
 
-  left:580px;   /* desplazado a la izquierda */
-
+  left:580px;
   bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-interference-off.webp");
@@ -243,8 +281,7 @@
 
 #reset-frequency{
 
-  left:730px;   /* desplazado a la izquierda */
-
+  left:730px;
   bottom:28px;
 
   background-image:url("/modules/ultima-emision/assets/btn-reset-off.webp");
@@ -301,34 +338,7 @@
 
 
 /* ============================
-   BOTÓN CONEXIÓN
-============================ */
-
-.radio-connection{
-
-  position:absolute;
-
-  left:140px;
-  top:265px;
-
-  width:140px;
-  height:70px;
-
-  background:transparent;
-  border:none;
-
-  color:#111;
-  font-size:14px;
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-
-
-/* ============================
-   VENTANAS ESTILO RADIO
+   VENTANAS DEL SISTEMA
 ============================ */
 
 .radio-window{
