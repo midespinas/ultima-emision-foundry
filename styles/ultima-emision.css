@@ -81,7 +81,6 @@
 }
 
 
-
 /* ============================
    MEDIDOR SIGNAL
 ============================ */
@@ -90,17 +89,17 @@
 
   position:absolute;
 
-  left:115px;
+  left:105px;   /* desplazado ligeramente a la izquierda */
   top:120px;
 
-  width:320px;
+  width:330px;  /* un poco más largo */
   height:18px;
 
   border-radius:3px;
 
   overflow:hidden;
 
-  /* COLORES DEL MEDIDOR */
+  /* COLORES FIJOS */
 
   background:
   linear-gradient(
@@ -120,22 +119,26 @@
 
 
 /* ============================
-   BARRA DE COBERTURA NEGRA
+   INDICADOR DE FRECUENCIA
 ============================ */
 
 .radio-signal-bar{
 
   position:absolute;
 
-  right:0;
+  left:0;
   top:0;
 
+  width:6px;   /* grosor del indicador */
   height:100%;
-  width:0%;
 
   background:#000;
 
-  transition:width 0.4s ease;
+  box-shadow:
+    0 0 4px rgba(0,0,0,0.9),
+    0 0 8px rgba(0,0,0,0.6);
+
+  transition:left 0.4s ease;
 
 }
 
@@ -166,7 +169,6 @@
   opacity:0.5;
 
 }
-
 
 
 /* ============================
@@ -207,7 +209,6 @@
 }
 
 
-
 /* ============================
    EFECTO CRT
 ============================ */
@@ -234,7 +235,6 @@
 }
 
 
-
 /* ============================
    CONTENEDOR BOTONES
 ============================ */
@@ -247,7 +247,6 @@
   width:100%;
 
 }
-
 
 
 /* ============================
@@ -279,7 +278,6 @@
 }
 
 
-
 /* ============================
    PERDER FRECUENCIA
 ============================ */
@@ -298,7 +296,6 @@
   background-image:url("/modules/ultima-emision/assets/btn-frequency-on.webp");
 
 }
-
 
 
 /* ============================
@@ -321,7 +318,6 @@
 }
 
 
-
 /* ============================
    REINICIAR
 ============================ */
@@ -340,7 +336,6 @@
   background-image:url("/modules/ultima-emision/assets/btn-reset-on.webp");
 
 }
-
 
 
 /* ============================
@@ -381,7 +376,6 @@
     drop-shadow(0 0 26px rgba(255,0,0,0.7));
 
 }
-
 
 
 /* ============================
