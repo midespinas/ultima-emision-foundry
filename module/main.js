@@ -6,9 +6,6 @@ class RadioPanel extends Application {
   frequencies = 6
   signalLevel = 6
 
-  connections = []
-
-
   static get defaultOptions() {
 
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -25,6 +22,7 @@ class RadioPanel extends Application {
     })
 
   }
+
 
 
   async _renderInner() {
@@ -58,11 +56,9 @@ class RadioPanel extends Application {
       </div>
 
       <div class="radio-screen">
-
         <div id="radio-log">
         > Sistema listo
         </div>
-
       </div>
 
 
@@ -144,10 +140,9 @@ class RadioPanel extends Application {
 
     html.find("#lose-frequency").click(()=>{
 
-      if(this.frequencies>0){
+      if(this.frequencies > 0){
 
         this.frequencies--
-
         this.signalLevel--
 
         ChatMessage.create({
@@ -155,7 +150,6 @@ class RadioPanel extends Application {
         })
 
         this.updateLights(html)
-
         this.updateSignal(html)
 
       }
@@ -207,7 +201,7 @@ class RadioPanel extends Application {
 
 
 
-    /* GENERAR LLAMADA */
+    /* BOTON LLAMADA */
 
     html.find("#radio-call").click(()=>{
 
@@ -235,10 +229,10 @@ class RadioPanel extends Application {
 
 
 
+
 /* ============================
    GENERADOR DE LLAMADAS
 ============================ */
-
 
 class CallGenerator extends Application {
 
@@ -249,7 +243,6 @@ class CallGenerator extends Application {
     this.panel = panel
 
   }
-
 
   static get defaultOptions(){
 
@@ -271,35 +264,19 @@ class CallGenerator extends Application {
   async _renderInner(){
 
     const names = [
-
-      "Carlos",
-      "Marta",
-      "Lucía",
-      "Raúl",
-      "Ana",
-      "Miguel",
-      "Laura"
-
+      "Carlos","Marta","Lucía","Raúl","Ana","Miguel","Laura"
     ]
 
     const cities = [
-
-      "Madrid",
-      "Valencia",
-      "Sevilla",
-      "Bilbao",
-      "Granada"
-
+      "Madrid","Valencia","Sevilla","Bilbao","Granada"
     ]
 
     const comments = [
-
       "Creo que vi algo extraño en el cielo.",
       "Escucho vuestro programa cada noche.",
       "Hay interferencias en mi radio.",
       "Algo raro pasa en mi barrio.",
       "Creo que alguien intenta comunicarse."
-
     ]
 
 
@@ -324,7 +301,7 @@ class CallGenerator extends Application {
 
       <p>"${comment}"</p>
 
-      <button id="send-call">Aceptar llamada</button>
+      <button id="accept-call">Aceptar llamada</button>
 
     </div>
     `)
@@ -337,7 +314,7 @@ class CallGenerator extends Application {
 
     super.activateListeners(html)
 
-    html.find("#send-call").click(()=>{
+    html.find("#accept-call").click(()=>{
 
       new ConnectionRegister(this.panel, this.name, this.city).render(true)
 
@@ -351,10 +328,10 @@ class CallGenerator extends Application {
 
 
 
-/* ============================
-   REGISTRO DE CONEXION
-============================ */
 
+/* ============================
+   REGISTRO CONEXION
+============================ */
 
 class ConnectionRegister extends Application{
 
@@ -367,7 +344,6 @@ class ConnectionRegister extends Application{
     this.city = city
 
   }
-
 
   static get defaultOptions(){
 
@@ -425,18 +401,14 @@ class ConnectionRegister extends Application{
       const city = html.find("#conn-city").val()
       const note = html.find("#conn-note").val()
 
-      const panel = this.panel
-
       const entry = `${name} (${city}) → ${note}`
 
-      const app = Object.values(ui.windows)
+      const panel = Object.values(ui.windows)
         .find(w => w instanceof RadioPanel)
 
-      if(app){
+      if(panel){
 
-        const htmlPanel = app.element
-
-        const log = htmlPanel.find("#radio-log")
+        const log = panel.element.find("#radio-log")
 
         log.append(`<div class="radio-entry">> ${entry}</div>`)
 
@@ -455,9 +427,8 @@ class ConnectionRegister extends Application{
 
 
 /* ============================
-   CARGA DEL MODULO
+   INICIAR PANEL
 ============================ */
-
 
 Hooks.once("ready", ()=>{
 
