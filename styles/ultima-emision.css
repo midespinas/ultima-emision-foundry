@@ -32,7 +32,6 @@
 }
 
 
-
 /* ============================
    LUCES
 ============================ */
@@ -91,13 +90,13 @@
 
   position:absolute;
 
-  left:130px;
-  top:118px;
+  left:120px;
+  top:122px;
 
-  width:250px;
-  height:22px;
+  width:305px;
+  height:16px;
 
-  border-radius:4px;
+  border-radius:3px;
 
   overflow:hidden;
 
@@ -116,7 +115,34 @@
 
   box-shadow:
     0 0 8px rgba(0,255,120,0.7),
-    inset 0 0 4px rgba(0,0,0,0.6);
+    inset 0 0 4px rgba(0,0,0,0.7);
+
+}
+
+
+/* ============================
+   EFECTO SEGMENTOS LED
+============================ */
+
+.radio-signal::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45) 2px,
+      transparent 2px,
+      transparent 10px
+    );
+
+  pointer-events:none;
+
+  opacity:0.45;
 
 }
 
