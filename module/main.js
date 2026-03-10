@@ -1,7 +1,8 @@
 const MODULE_ID = "ultima-emision";
 
+
 /* ============================
-   DATOS DEL SISTEMA
+   DATOS
 ============================ */
 
 let conexiones = [];
@@ -26,6 +27,7 @@ function actualizarCRT(html){
   crt.text(texto);
 
 }
+
 
 
 /* ============================
@@ -79,7 +81,10 @@ class ConnectionWindow extends Application{
 
       conexiones.push(value.trim());
 
-      ui.windows["radio-panel"]?.render(true);
+      const panel = Object.values(ui.windows)
+        .find(w => w.id === "radio-panel");
+
+      if(panel) panel.render(true);
 
       this.close();
 
@@ -88,6 +93,7 @@ class ConnectionWindow extends Application{
   }
 
 }
+
 
 
 /* ============================
@@ -114,8 +120,9 @@ class RadioPanel extends Application {
   }
 
 
+
   /* ============================
-     HTML DEL PANEL
+     HTML PANEL
   ============================ */
 
   async _renderInner() {
@@ -153,17 +160,11 @@ class RadioPanel extends Application {
 
       <div class="radio-buttons">
 
-        <button id="lose-frequency">
-        Perder<br>Frecuencia
-        </button>
+        <button id="lose-frequency"></button>
 
-        <button id="interference">
-        Interferencia
-        </button>
+        <button id="interference"></button>
 
-        <button id="reset-frequency">
-        Reiniciar
-        </button>
+        <button id="reset-frequency"></button>
 
       </div>
 
@@ -180,6 +181,7 @@ class RadioPanel extends Application {
     return $(html);
 
   }
+
 
 
   /* ============================
@@ -203,6 +205,7 @@ class RadioPanel extends Application {
   }
 
 
+
   /* ============================
      EVENTOS
   ============================ */
@@ -212,6 +215,7 @@ class RadioPanel extends Application {
     super.activateListeners(html);
 
     actualizarCRT(html);
+
 
 
     /* PERDER FRECUENCIA */
@@ -231,6 +235,7 @@ class RadioPanel extends Application {
       }
 
     });
+
 
 
     /* INTERFERENCIA */
@@ -257,6 +262,7 @@ class RadioPanel extends Application {
     });
 
 
+
     /* REINICIAR */
 
     html.find("#reset-frequency").click(() => {
@@ -272,6 +278,7 @@ class RadioPanel extends Application {
     });
 
 
+
     /* BOTÓN LLAMADA */
 
     html.find("#radio-call").click(() => {
@@ -283,6 +290,7 @@ class RadioPanel extends Application {
       new CallGenerator().render(true);
 
     });
+
 
 
     /* BOTÓN REGISTRAR CONEXIÓN */
@@ -318,6 +326,7 @@ class CallGenerator extends Application {
     });
 
   }
+
 
 
   async _renderInner() {
@@ -380,6 +389,7 @@ class CallGenerator extends Application {
     return $(html);
 
   }
+
 
 
   activateListeners(html){
