@@ -120,7 +120,6 @@
 
 }
 
-
 .radio-signal-bar{
 
   position:absolute;
@@ -136,7 +135,6 @@
   transition:left 0.4s ease;
 
 }
-
 
 .radio-signal::after{
 
@@ -246,5 +244,58 @@
 .radio-call.active{
 
   background-image:url("/modules/ultima-emision/assets/call-button-on.webp");
+
+}
+
+
+/* ============================
+   BOTÓN CONEXIÓN
+============================ */
+
+.radio-connection{
+
+  position:absolute;
+
+  left:250px;
+  top:205px;
+
+  width:90px;
+  height:80px;
+
+  border:none;
+
+  background-image:url("/modules/ultima-emision/assets/connection-button.webp");
+
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+
+  cursor:pointer;
+
+}
+
+.radio-connection.active{
+
+  filter:
+    drop-shadow(0 0 6px red)
+    drop-shadow(0 0 12px red);
+
+}
+
+
+/* ============================
+   VENTANAS
+============================ */
+
+.radio-window{
+
+  padding:20px;
+  font-family:monospace;
+
+  color:#00ff9c;
+
+  background:#020202;
+
+  border:2px solid #550000;
 
 }
