@@ -1,6 +1,6 @@
-/* =================================
+/* ============================
    VENTANA FOUNDRY
-================================= */
+============================ */
 
 .window-app .window-content{
   overflow:visible !important;
@@ -10,33 +10,9 @@
 }
 
 
-/* =================================
-   VENTANAS DEL MÓDULO
-================================= */
-
-.window-app.ultima-emision{
-  font-family:monospace;
-}
-
-.window-app.ultima-emision .window-content{
-
-  background:#0d0d0d;
-  border:2px solid #550000;
-
-  box-shadow:
-  0 0 30px rgba(0,0,0,0.8),
-  inset 0 0 20px rgba(0,0,0,0.7);
-
-  padding:18px;
-
-  color:#00ff9c;
-
-}
-
-
-/* =================================
+/* ============================
    PANEL CONSOLA
-================================= */
+============================ */
 
 .radio-console{
 
@@ -53,22 +29,22 @@
   margin:auto;
 
   font-family:monospace;
-
 }
 
 
-/* =================================
+
+/* ============================
    LUCES
-================================= */
+============================ */
 
 .radio-lights{
 
   position:absolute;
 
   top:30px;
-  left:60px;
+  left:95px;
 
-  width:540px;
+  width:500px;
 
   display:flex;
   justify-content:space-between;
@@ -81,6 +57,7 @@
   height:72px;
 
   object-fit:contain;
+
   border-radius:50%;
 
 }
@@ -88,9 +65,9 @@
 .radio-light.on{
 
   filter:
-  drop-shadow(0 0 6px red)
-  drop-shadow(0 0 14px red)
-  drop-shadow(0 0 26px rgba(255,0,0,0.7));
+    drop-shadow(0 0 6px red)
+    drop-shadow(0 0 14px red)
+    drop-shadow(0 0 26px rgba(255,0,0,0.7));
 
 }
 
@@ -107,19 +84,20 @@
 }
 
 
-/* =================================
+
+/* ============================
    CRT
-================================= */
+============================ */
 
 .radio-screen{
 
   position:absolute;
 
-  top:105px;
-  left:480px;
+  top:95px;
+  left:470px;
 
-  width:370px;
-  height:255px;
+  width:380px;
+  height:260px;
 
   background-image:url("/modules/ultima-emision/assets/crt-screen.webp");
 
@@ -129,27 +107,25 @@
   padding:20px;
 
   color:#00ff9c;
-
-  font-size:14px;
+  font-size:15px;
 
   text-shadow:0 0 6px #00ff9c;
 
   overflow:hidden;
 
-  border-radius:16px;
+  border-radius:18px;
 
   box-shadow:
-
-  inset 0 0 45px rgba(0,0,0,0.9),
-  inset 0 0 20px rgba(0,0,0,0.7),
-  0 0 8px rgba(0,0,0,0.6);
+    inset 0 0 45px rgba(0,0,0,0.9),
+    inset 0 0 20px rgba(0,0,0,0.7),
+    0 0 8px rgba(0,0,0,0.6);
 
 }
 
 
-/* =================================
+/* ============================
    EFECTO CRT
-================================= */
+============================ */
 
 .radio-screen::after{
 
@@ -159,44 +135,39 @@
   inset:0;
 
   background:
-
-  repeating-linear-gradient(
-
-    to bottom,
-
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0.15) 1px,
-    transparent 1px,
-    transparent 3px
-
-  );
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
 
   pointer-events:none;
-
   opacity:0.35;
 
 }
 
 
-/* =================================
+
+/* ============================
    CONTENEDOR BOTONES
-================================= */
+============================ */
 
 .radio-buttons{
 
   position:absolute;
-
   bottom:0;
   left:0;
-
   width:100%;
 
 }
 
 
-/* =================================
+
+/* ============================
    BOTONES GENERALES
-================================= */
+============================ */
 
 .radio-buttons button{
 
@@ -222,45 +193,50 @@
   text-align:center;
 
   text-shadow:
-  0 1px 2px rgba(255,255,255,0.35);
+    0 1px 2px rgba(255,255,255,0.35);
 
 }
 
 
-/* =================================
-   BOTONES PRINCIPALES
-================================= */
 
-/* PERDER FRECUENCIA */
+/* ============================
+   PERDER FRECUENCIA
+============================ */
 
 .radio-buttons button:nth-child(1){
 
-  left:516px;
-  bottom:28px;
+  left:495px;
+  bottom:32px;
 
-  font-size:15px;
+  font-size:14px;
   line-height:16px;
 
 }
 
 
-/* INTERFERENCIA */
+
+/* ============================
+   INTERFERENCIA
+============================ */
 
 .radio-buttons button:nth-child(2){
 
-  left:624px;
+  left:610px;
   bottom:32px;
 
-  font-size:13px;
+  font-size:12px;
 
 }
 
 
-/* REINICIAR */
+
+/* ============================
+   REINICIAR
+============================ */
 
 .radio-buttons button:nth-child(3){
 
-  left:732px;
+  left:730px;
   bottom:34px;
 
   font-size:18px;
@@ -268,19 +244,23 @@
 }
 
 
-/* =================================
-   BOTÓN LLAMADA (BOTÓN FÍSICO)
-================================= */
+
+/* ============================
+   BOTÓN LLAMADA
+============================ */
 
 .radio-call{
 
   position:absolute;
 
-  left:260px;
-  top:260px;
+  left:250px;
+  top:210px;
 
-  width:74px;
-  height:74px;
+  width:110px;
+  height:110px;
+
+  border:none;
+  background:transparent;
 
   background-image:url("/modules/ultima-emision/assets/call-button-off.webp");
 
@@ -288,63 +268,118 @@
   background-repeat:no-repeat;
   background-position:center;
 
-  border:none;
-
   cursor:pointer;
 
 }
 
 
-/* BOTÓN ENCENDIDO */
+/* BOTÓN LLAMADA ACTIVO */
 
 .radio-call.active{
 
   background-image:url("/modules/ultima-emision/assets/call-button-on.webp");
 
   filter:
-  drop-shadow(0 0 6px red)
-  drop-shadow(0 0 14px red)
-  drop-shadow(0 0 26px rgba(255,0,0,0.7));
+    drop-shadow(0 0 6px red)
+    drop-shadow(0 0 16px red)
+    drop-shadow(0 0 26px rgba(255,0,0,0.7));
 
 }
 
 
-/* =================================
-   BOTÓN REGISTRAR CONEXIÓN
-================================= */
+
+/* ============================
+   BOTÓN CONEXIÓN
+============================ */
 
 .radio-connection{
 
   position:absolute;
 
-  left:250px;
-  top:340px;
+  left:140px;
+  top:265px;
 
-  width:160px;
-  height:60px;
+  width:140px;
+  height:70px;
 
   background:transparent;
   border:none;
 
-  font-size:16px;
-  font-weight:bold;
-
   color:#111;
+  font-size:14px;
+  font-weight:bold;
 
   cursor:pointer;
 
-  text-align:center;
+}
 
-  text-shadow:
-  0 1px 2px rgba(255,255,255,0.3);
+
+
+/* ============================
+   VENTANAS ESTILO RADIO
+============================ */
+
+.radio-window{
+
+  padding:20px;
+  font-family:monospace;
+
+  color:#00ff9c;
+
+  background:#020202;
+
+  border:2px solid #550000;
+
+  box-shadow:
+    0 0 20px rgba(0,0,0,0.8),
+    inset 0 0 20px rgba(0,0,0,0.9);
 
 }
 
-.radio-connection:hover{
 
-  text-shadow:
+.radio-window h2{
 
-  0 0 6px rgba(255,255,255,0.6),
-  0 0 10px rgba(255,255,255,0.3);
+  margin:0 0 10px 0;
+
+  color:#ff4040;
+
+  font-size:18px;
+
+  border-bottom:1px solid #550000;
+  padding-bottom:5px;
+
+}
+
+
+.radio-window input{
+
+  width:100%;
+  padding:6px;
+
+  background:#111;
+  border:1px solid #550000;
+
+  color:#00ff9c;
+
+}
+
+
+.radio-window button{
+
+  width:100%;
+  margin-top:12px;
+
+  background:#330000;
+  border:1px solid #aa0000;
+
+  color:#fff;
+
+  cursor:pointer;
+
+}
+
+.radio-window button:hover{
+
+  background:#660000;
 
 }
