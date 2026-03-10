@@ -1,131 +1,25 @@
 const MODULE_ID = "ultima-emision";
 
-
-/* ============================
-   DATOS
-============================ */
-
-let conexiones = [];
-
-
-/* ============================
-   ACTUALIZAR CRT
-============================ */
-
-function actualizarCRT(html){
-
-  const crt = html.find("#radio-log");
-
-  if(!crt.length) return;
-
-  let texto = "> Señal estable\n\n";
-
-  conexiones.forEach(c=>{
-    texto += `> Conexión detectada: ${c}\n`;
-  });
-
-  crt.text(texto);
-
-}
-
-
-
-/* ============================
-   VENTANA REGISTRAR CONEXIÓN
-============================ */
-
-class ConnectionWindow extends Application{
-
-  static get defaultOptions(){
-    return foundry.utils.mergeObject(super.defaultOptions,{
-      id:"radio-connection-window",
-      title:"Registrar Conexión",
-      width:420,
-      height:180,
-      resizable:false
-    });
-  }
-
-  async _renderInner(){
-
-    const html = `
-
-    <div class="radio-window">
-
-      <h2>Registrar Conexión</h2>
-
-      <input id="connection-input"
-      placeholder="Ej: Hospital San Mateo">
-
-      <button id="save-connection">
-      Guardar
-      </button>
-
-    </div>
-
-    `;
-
-    return $(html);
-
-  }
-
-  activateListeners(html){
-
-    super.activateListeners(html);
-
-    html.find("#save-connection").click(()=>{
-
-      const value = html.find("#connection-input").val();
-
-      if(!value || value.trim()==="") return;
-
-      conexiones.push(value.trim());
-
-      const panel = Object.values(ui.windows)
-        .find(w => w.id === "radio-panel");
-
-      if(panel) panel.render(true);
-
-      this.close();
-
-    });
-
-  }
-
-}
-
-
-
-/* ============================
-   PANEL PRINCIPAL
-============================ */
-
 class RadioPanel extends Application {
 
   frequencies = 6;
 
   static get defaultOptions() {
-
     return foundry.utils.mergeObject(super.defaultOptions, {
-
       id: "radio-panel",
       title: "La Última Emisión",
       width: 900,
       height: 520,
       resizable: false,
       popOut: true
-
     });
-
   }
 
-
-
   /* ============================
-     HTML PANEL
+     HTML DEL PANEL
   ============================ */
 
-  async _renderInner() {
+  async _renderInner(data) {
 
     const lights = [];
 
@@ -143,13 +37,15 @@ class RadioPanel extends Application {
 
     }
 
-
     const html = `
-
     <div class="radio-console">
 
       <div class="radio-lights">
         ${lights.join("")}
+      </div>
+
+      <div class="radio-signal">
+        <div class="radio-signal-bar"></div>
       </div>
 
       <div class="radio-screen">
@@ -170,19 +66,11 @@ class RadioPanel extends Application {
 
       <button class="radio-call" id="radio-call"></button>
 
-      <button class="radio-connection" id="radio-connection">
-      Conexión
-      </button>
-
     </div>
-
     `;
 
     return $(html);
-
   }
-
-
 
   /* ============================
      ACTUALIZAR LUCES
@@ -202,9 +90,39 @@ class RadioPanel extends Application {
 
     });
 
+    this.updateSignal(html);
+
   }
 
+  /* ============================
+     ACTUALIZAR BARRA SIGNAL
+  ============================ */
 
+  updateSignal(html){
+
+    const bar = html.find(".radio-signal-bar");
+
+    const percent = (this.frequencies / 6) * 100;
+
+    bar.css("width", percent + "%");
+
+    if(this.frequencies >= 4){
+
+      bar.css("background","#00ff5a");
+
+    }
+    else if(this.frequencies >= 2){
+
+      bar.css("background","#ffcc00");
+
+    }
+    else{
+
+      bar.css("background","#ff2b2b");
+
+    }
+
+  }
 
   /* ============================
      EVENTOS
@@ -213,10 +131,6 @@ class RadioPanel extends Application {
   activateListeners(html) {
 
     super.activateListeners(html);
-
-    actualizarCRT(html);
-
-
 
     /* PERDER FRECUENCIA */
 
@@ -235,8 +149,6 @@ class RadioPanel extends Application {
       }
 
     });
-
-
 
     /* INTERFERENCIA */
 
@@ -261,8 +173,6 @@ class RadioPanel extends Application {
 
     });
 
-
-
     /* REINICIAR */
 
     html.find("#reset-frequency").click(() => {
@@ -277,34 +187,21 @@ class RadioPanel extends Application {
 
     });
 
+    /* LLAMADA */
 
+    html.find("#radio-call").click((ev) => {
 
-    /* BOTÓN LLAMADA */
+      const btn = $(ev.currentTarget);
 
-    html.find("#radio-call").click(() => {
-
-      const button = html.find("#radio-call");
-
-      button.addClass("active");
+      btn.toggleClass("active");
 
       new CallGenerator().render(true);
-
-    });
-
-
-
-    /* BOTÓN REGISTRAR CONEXIÓN */
-
-    html.find("#radio-connection").click(()=>{
-
-      new ConnectionWindow().render(true);
 
     });
 
   }
 
 }
-
 
 
 /* ============================
@@ -319,6 +216,7 @@ class CallGenerator extends Application {
 
       id: "radio-call-generator",
       title: "Llamada Entrante",
+
       width: 420,
       height: 320,
       resizable: false
@@ -327,9 +225,7 @@ class CallGenerator extends Application {
 
   }
 
-
-
-  async _renderInner() {
+  async _renderInner(data) {
 
     const names = [
       "Carlos",
@@ -359,14 +255,11 @@ class CallGenerator extends Application {
 
     ];
 
-
     const name = names[Math.floor(Math.random()*names.length)];
     const city = cities[Math.floor(Math.random()*cities.length)];
     const comment = comments[Math.floor(Math.random()*comments.length)];
 
-
     const html = `
-
     <div class="radio-window">
 
       <h2>📞 Llamada entrante</h2>
@@ -383,14 +276,11 @@ class CallGenerator extends Application {
       </button>
 
     </div>
-
     `;
 
     return $(html);
 
   }
-
-
 
   activateListeners(html){
 
@@ -406,8 +296,6 @@ class CallGenerator extends Application {
 
       this.close();
 
-      $("#radio-call").removeClass("active");
-
     });
 
   }
@@ -415,9 +303,8 @@ class CallGenerator extends Application {
 }
 
 
-
 /* ============================
-   INICIAR PANEL
+   CARGA DEL MÓDULO
 ============================ */
 
 Hooks.once("ready", () => {
