@@ -123,6 +123,7 @@
 }
 
 
+
 /* ============================
    EFECTO CRT
 ============================ */
@@ -205,8 +206,8 @@
 
 .radio-buttons button:nth-child(1){
 
-  left:495px;
-  bottom:32px;
+  left:520px;   /* desplazado a la derecha */
+  bottom:26px;  /* bajado ligeramente */
 
   font-size:14px;
   line-height:16px;
@@ -221,8 +222,8 @@
 
 .radio-buttons button:nth-child(2){
 
-  left:610px;
-  bottom:32px;
+  left:640px;   /* desplazado a la derecha */
+  bottom:24px;  /* bajado un poco más */
 
   font-size:12px;
 
@@ -253,7 +254,7 @@
 
   position:absolute;
 
-  left:250px;
+  left:360px;   /* movido hacia el CRT */
   top:210px;
 
   width:110px;
@@ -271,6 +272,7 @@
   cursor:pointer;
 
 }
+
 
 
 /* BOTÓN LLAMADA ACTIVO */
@@ -336,7 +338,6 @@
 
 }
 
-
 .radio-window h2{
 
   margin:0 0 10px 0;
@@ -350,7 +351,6 @@
 
 }
 
-
 .radio-window input{
 
   width:100%;
@@ -362,7 +362,6 @@
   color:#00ff9c;
 
 }
-
 
 .radio-window button{
 
