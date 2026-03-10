@@ -1,6 +1,6 @@
 const MODULE_ID = "ultima-emision";
 
-let radioPanelInstance = null;
+let radioPanel = null;
 
 
 class RadioPanel extends Application {
@@ -72,19 +72,77 @@ class RadioPanel extends Application {
 
 
 
+  updateLights(html){
+
+    const lights=html.find(".radio-light");
+
+    lights.each((i,el)=>{
+
+      const img=i<this.frequencies
+        ?"light-on.webp"
+        :"light-off.webp";
+
+      el.src=`/modules/${MODULE_ID}/assets/${img}`;
+
+    });
+
+  }
+
+
+
   activateListeners(html){
 
     super.activateListeners(html);
 
 
-    html.find("#radio-call").click(()=>{
+    html.find("#lose-frequency").click(()=>{
 
-      html.find("#radio-call").addClass("active");
+      if(this.frequencies>0){
+
+        this.frequencies--;
+
+        ChatMessage.create({
+          content:"📡 Una frecuencia se ha perdido."
+        });
+
+        this.updateLights(html);
+
+      }
+
+    });
+
+
+    html.find("#interference").click(()=>{
+
+      ChatMessage.create({
+        content:"📻 La señal se llena de estática."
+      });
+
+    });
+
+
+    html.find("#reset-frequency").click(()=>{
+
+      this.frequencies=6;
+
+      ChatMessage.create({
+        content:"🔧 Todas las frecuencias han sido restauradas."
+      });
+
+      this.updateLights(html);
+
+    });
+
+
+    html.find("#radio-call").click((ev)=>{
+
+      const btn=$(ev.currentTarget);
+
+      btn.toggleClass("active");
 
       new CallGenerator().render(true);
 
     });
-
 
   }
 
@@ -96,12 +154,12 @@ class RadioPanel extends Application {
    GENERADOR DE LLAMADAS
 ============================ */
 
-class CallGenerator extends Application{
+class CallGenerator extends Application {
 
-  static get defaultOptions(){
+  static get defaultOptions() {
 
     return foundry.utils.mergeObject(super.defaultOptions,{
-      title:"Llamada entrante",
+      title:"Llamada Entrante",
       width:420,
       height:320
     });
@@ -112,7 +170,7 @@ class CallGenerator extends Application{
   async _renderInner(){
 
     const names=["Carlos","Marta","Lucía","Raúl","Ana","Miguel"];
-    const cities=["Madrid","Valencia","Bilbao","Granada","Sevilla"];
+    const cities=["Madrid","Valencia","Bilbao","Granada"];
 
     const name=names[Math.floor(Math.random()*names.length)];
     const city=cities[Math.floor(Math.random()*cities.length)];
@@ -142,9 +200,8 @@ class CallGenerator extends Application{
 
     html.find("#accept-call").click(()=>{
 
-      const panel=radioPanelInstance.element;
-
-      panel.find("#radio-connection").addClass("active");
+      radioPanel.element.find("#radio-connection")
+        .addClass("active");
 
       new ConnectionRegister(this.name,this.city).render(true);
 
@@ -221,11 +278,12 @@ class ConnectionRegister extends Application{
       const city=html.find("#conn-city").val();
       const note=html.find("#conn-note").val();
 
-      const log=radioPanelInstance.element.find("#radio-log");
+      const log=radioPanel.element.find("#radio-log");
 
       log.append(`<div>> ${name} (${city}) → ${note}</div>`);
 
-      radioPanelInstance.element.find("#radio-connection").removeClass("active");
+      radioPanel.element.find("#radio-connection")
+        .removeClass("active");
 
       this.close();
 
@@ -238,16 +296,15 @@ class ConnectionRegister extends Application{
 
 
 /* ============================
-   CARGA DEL MÓDULO
+   INICIO
 ============================ */
 
 Hooks.once("ready",()=>{
 
   if(game.user.isGM){
 
-    radioPanelInstance=new RadioPanel();
-
-    radioPanelInstance.render(true);
+    radioPanel=new RadioPanel();
+    radioPanel.render(true);
 
   }
 
